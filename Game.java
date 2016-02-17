@@ -15,7 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
-public class Game2 extends JPanel {
+public class Game extends JPanel {
 
 	@Override
 	public void paint(Graphics g) {
@@ -28,7 +28,7 @@ public class Game2 extends JPanel {
 	
 	public static void main(String[] args) {
 		JFrame frame = new JFrame("My Game");
-		frame.add(new Game2());
+		frame.add(new Game());
 		frame.setSize(800, 600);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
