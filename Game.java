@@ -48,11 +48,4 @@ public class Game extends JPanel
             Thread.sleep(10);
         }
     }
-    
-
-    public static void main(String[] args) throws InterruptedException
-    {
-        Game g = new Game();
-        g.play();
-    }
 }
