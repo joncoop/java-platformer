@@ -24,7 +24,9 @@ public class Game extends JPanel
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
-        player = new Character(384, 284, 32, 32);
+        World world = new World();
+        
+        player = new Character(384, 284, 32, 32, world);
     }
     
     public void paint(Graphics g) 
