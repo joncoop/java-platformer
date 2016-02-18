@@ -11,14 +11,16 @@ import java.awt.Graphics;
 
 public abstract class Sprite
 {
+    private Rectangle rect;
     
-    public Sprite()
+    public Sprite(Rectangle rect)
     {
-
+        this.rect = rect;
     }
     
     public abstract void update();
     
     public abstract void paint(Graphics g);
+    
 
 }

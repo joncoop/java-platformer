@@ -16,7 +16,7 @@ public class Character extends Sprite
     
     public Character(int x, int y, int w, int h)
     {
-        super();
+        super(new Rectangle(x, y, w, h));
         this.x = x;
         this.y = y;
         this.w = w;
