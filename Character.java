@@ -14,13 +14,14 @@ public class Character extends Sprite
     private World world;
     private int x, y, w, h;
     
-    public Character(int x, int y, int w, int h)
+    public Character(int x, int y, int w, int h, World world)
     {
         super(new Rectangle(x, y, w, h));
         this.x = x;
         this.y = y;
         this.w = w;
         this.h = h;
+        this.world = world;
     }
     
     public void update()
