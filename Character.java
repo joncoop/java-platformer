@@ -10,6 +10,7 @@ import java.awt.image.BufferedImage;
 import java.awt.Color;
 import java.awt.Graphics;
 
+
 public class Character extends Sprite
 {
     private World world;
@@ -23,10 +24,19 @@ public class Character extends Sprite
         vx = 0;
         vy = 0;
     }
-    
+
     public void update()
     {
         move(vx, vy);
     }
     
+    public void setVx(int vx)
+    {
+        this.vx = vx;
+    }
+
+    public void setVy(int vy)
+    {
+        this.vy = vy;
+    }
 }
