@@ -5,18 +5,21 @@
  * @version (a version number or a date)
  */
 
+import java.awt.image.BufferedImage;
 import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 
 public class Game extends JPanel 
 {
     private JFrame frame;
     private Character player;
     
-    public Game()
+    public Game() throws IOException
     {
         frame = new JFrame("My Game");
         frame.add(this);
@@ -26,7 +29,8 @@ public class Game extends JPanel
         
         World world = new World();
         
-        player = new Character(384, 284, 32, 32, world);
+        BufferedImage playerImg = ImageIO.read(new File("img/baby_tux.png"));
+        player = new Character(384, 284, playerImg, world);
     }
     
     public void paint(Graphics g) 
