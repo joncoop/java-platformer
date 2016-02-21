@@ -24,6 +24,7 @@ public class World
     
     private ArrayList<Sprite> blockList = new ArrayList<Sprite>();
     private ArrayList<Sprite> coinList = new ArrayList<Sprite>();
+    private ArrayList<Sprite> enemyList = new ArrayList<Sprite>();
             
     public World() throws IOException
     {
@@ -52,8 +53,13 @@ public class World
         
         coinList.add(new Coin(3 * 64, 2 * 64, coinImg));
         coinList.add(new Coin(5 * 64, 4 * 64, coinImg));
-        coinList.add(new Coin(10 * 64, 5 * 64, coinImg));        
-    }
+        coinList.add(new Coin(10 * 64, 5 * 64, coinImg));       
+
+        // make some enemies
+        BufferedImage enemyImg = ImageIO.read(new File("img/slime.png"));
+        
+        enemyList.add(new Enemy(3 * 64, 7 * 64, enemyImg, this));      
+}
 
     public int getTop()
     {
@@ -97,5 +103,8 @@ public class World
             
         for (Sprite coin : coinList)
             coin.paint(g);
+            
+        for (Sprite enemy : enemyList)
+            enemy.paint(g);
     }
 }
