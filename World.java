@@ -20,7 +20,6 @@ public class World
     private int left;
     private double gravity = 1.0;
     
-    private Character player;
     private ArrayList<Block> blockList;
             
     public World() throws IOException
@@ -35,7 +34,9 @@ public class World
         blockList = new ArrayList<Block>();
         
         int x = 0;
-        int y = 550;        while (x < 800)
+        int y = 550;
+        
+        while (x < 800)
         {
             Block b = new Block(x, 500, blockImg);
             blockList.add(b);

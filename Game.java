@@ -16,7 +16,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
-public class Game extends JPanel  implements KeyListener
+public class Game extends JPanel implements KeyListener
 {
     private JFrame frame;
     private Character player;
@@ -25,10 +25,6 @@ public class Game extends JPanel  implements KeyListener
     
     public Game() throws IOException
     {
-        // load images
-        BufferedImage playerImg = ImageIO.read(new File("img/baby_tux.png"));
-
-
         // make Jframe
         frame = new JFrame("My Game");
         frame.add(this);
@@ -37,11 +33,13 @@ public class Game extends JPanel  implements KeyListener
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         // make world
-        World world = new World();
+        world = new World();
         
         // make player
-        player = new Character(384, 200, playerImg, world);
+        BufferedImage playerImg = ImageIO.read(new File("img/baby_tux.png"));
+        player = new Character(384, 200, playerImg, this);
 
+        // get block list
         blockList = world.getAllBlocks();
         
         addKeyListener(this);
@@ -102,5 +100,10 @@ public class Game extends JPanel  implements KeyListener
     
     public void keyTyped(KeyEvent e) {
         // does nothing
+    }
+    
+    public World getWorld()
+    {
+        return world;
     }
 }

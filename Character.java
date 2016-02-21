@@ -9,15 +9,15 @@ import java.awt.image.BufferedImage;
 
 public class Character extends Sprite
 {
-    private World world;
+    private Game game;
     private int vx, vy;
     private int runSpeed = 5;
     private int jumpPower = 20;
     
-    public Character(int x, int y, BufferedImage img, World world)
+    public Character(int x, int y, BufferedImage img, Game game)
     {
         super(x, y, img);
-        this.world = world;
+        this.game = game;
         
         vx = 0;
         vy = 0;
@@ -25,6 +25,8 @@ public class Character extends Sprite
 
     public void update()
     {
+        World world = game.getWorld();
+
         // apply gravity
         vy += world.getGravity();
         
