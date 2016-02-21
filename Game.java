@@ -21,7 +21,7 @@ public class Game extends JPanel implements KeyListener
     private JFrame frame;
     private Character player;
     private World world;
-    private ArrayList<Block> blockList = new ArrayList<Block>();
+    private SpriteGroup blockList = new SpriteGroup();
     
     public Game() throws IOException
     {
@@ -51,9 +51,7 @@ public class Game extends JPanel implements KeyListener
         super.paint(g);
         
         player.paint(g);
-        
-        for (Block b : blockList)
-            b.paint(g);
+        blockList.paint(g);
 
     }
     

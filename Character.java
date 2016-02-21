@@ -6,6 +6,7 @@
  */
 
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 public class Character extends Sprite
 {
@@ -45,6 +46,17 @@ public class Character extends Sprite
             nextY = world.getTop();
         else if (nextY + height > world.getBottom())
             nextY = world.getBottom() - height;
+        
+            
+        // process blocks
+        /* not working because of type errors, need SpriteGroup
+        ArrayList<Block> blockList = world.getAllBlocks();
+        ArrayList<Sprite> blockHitList = getCollisionList(blockList);
+        
+        for (Block hit : blockHitList)
+            // do something
+            ;
+         */
         
         moveTo(nextX, nextY);
     }
