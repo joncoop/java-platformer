@@ -14,14 +14,16 @@ import java.util.ArrayList;
 public class Character extends Sprite
 {
     private World world;
+    private Player player;
     private int vx, vy;
     private int runSpeed = 5;
     private int jumpPower = 20;
     
-    public Character(int x, int y, BufferedImage img, World world)
+    public Character(int x, int y, BufferedImage img, World world, Player player)
     {
         super(x, y, img);
         this.world = world;
+        this.player = player;
         
         vx = 0;
         vy = 0;
@@ -102,9 +104,12 @@ public class Character extends Sprite
         List<Sprite> coinList = world.getAllCoins();
         List<Sprite> hitList = getCollisionList(coinList);
         
-        for (Sprite coin : hitList)
+        for (Sprite hit : hitList)
         {
-            coinList.remove(coin);
+            player.addPoints(((Coin)hit).getValue());
+            coinList.remove(hit);
+            
+            System.out.println(player.getScore());
         }
         
     }

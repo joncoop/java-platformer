@@ -23,7 +23,8 @@ public class Game extends JPanel
     public static final int END = 3;
     
     private JFrame frame;
-    private Character player;
+    private Player player;
+    private Character character;
     private World world;
     private int state;
     
@@ -40,14 +41,17 @@ public class Game extends JPanel
         world = new World();
         
         // make player
+        player = new Player();
+        
+        // make character
         BufferedImage playerImg = ImageIO.read(new File("img/baby_tux.png"));
-        player = new Character(7 * 64, 7 * 64, playerImg, world);
+        character = new Character(7 * 64, 7 * 64, playerImg, world, player);
 
-        world.addPlayer(player);
+        world.addPlayer(character);
         
         // add input handlers
         addKeyListener(new GameControls(this));
-        addKeyListener(new PlayerControls(player, this));
+        addKeyListener(new PlayerControls(character, this));
         
         // set game state
         state = START;

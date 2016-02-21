@@ -7,24 +7,24 @@
  *      <https://github.com/joncoop/java-platformer>.
  */
 
-import java.awt.image.BufferedImage;
-
-public class Coin extends Sprite
+public class Player
 {
-    private int value = 1;
+    private int lives;
+    private int score;
     
-    public Coin(int x, int y, BufferedImage img)
+    public Player()
     {
-        super(x, y, img);
+        this.lives = 0;
+        this.score = 0;
     }
     
-    public int getValue()
+    public void addPoints(int points)
     {
-        return value;
+        score += points;
     }
     
-    public void update()
+    public int getScore()
     {
-        
+        return score;
     }
 }
