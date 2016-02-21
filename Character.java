@@ -27,6 +27,10 @@ public class Character extends Sprite
 
     public void update()
     {
+        // apply gravity
+        vy += world.getGravity();
+        
+        // check world boundaries
         int nextX = (int)getRect().getX() + vx;
         int nextY = (int)getRect().getY() + vy;
         int width = (int)getRect().getWidth();

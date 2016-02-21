@@ -13,6 +13,7 @@ public class World
     private int bottom;
     private int right;
     private int left;
+    private double gravity = 1.0;
     
     public World()
     {
@@ -40,5 +41,10 @@ public class World
     public int getLeft()
     {
         return left;
+    }
+    
+    public double getGravity()
+    {
+        return gravity;
     }
 }
