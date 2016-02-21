@@ -28,11 +28,6 @@ public abstract class Sprite
         this.rect = new Rectangle(x, y, w, h);
     }
     
-    public Rectangle getRect()
-    {
-        return rect;
-    }
-    
     public void move(int dx, int dy)
     {
         rect.translate(dx, dy);
@@ -41,6 +36,58 @@ public abstract class Sprite
     public void moveTo(int x, int y)
     {
         rect.setLocation(x, y);
+    }
+    
+    public void setRectTop(int top)
+    {
+        int x = (int) (rect.getX());
+        int y = top;
+        
+        rect.setLocation(x, y);
+    }
+    
+    public void setRectRight(int right)
+    {
+        int x = (int) (right - rect.getWidth());
+        int y = (int) (rect.getY());
+        
+        rect.setLocation(x, y);
+    }
+    
+    public void setRectBottom(int bottom)
+    {
+        int x = (int) (rect.getX());
+        int y = (int) (bottom - rect.getHeight());
+        
+        rect.setLocation(x, y);
+    }
+    
+    public void setRectLeft(int left)
+    {
+        int x = left;
+        int y = (int) (rect.getY());
+        
+        rect.setLocation(x, y);
+    }
+    
+    public int getRectTop()
+    {
+        return (int) (rect.getY());
+    }
+    
+    public int getRectRight()
+    {
+        return (int) (rect.getX() + rect.getWidth());
+    }
+    
+    public int getRectBottom()
+    {
+        return (int) (rect.getY() + rect.getHeight());
+    }
+    
+    public int getRectLeft()
+    {
+        return (int) (rect.getX());
     }
     
     public boolean collidesWith(Sprite other)
@@ -65,17 +112,4 @@ public abstract class Sprite
     }
     
     public abstract void update();
-    
-    /*
-     * Idea: Make this class behave like a Rectangle.
-     * 
-     * Methods:
-     * 
-     * getRectRight, setRectRight, getRectTop, setRectTop, etc.
-     * 
-     * This should hopefully clean up the Character update() & related methods.
-     * 
-     * move & moveTo can stay, but might be unused. (Could still be useful in other classes.
-     */
-
 }
