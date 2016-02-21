@@ -25,9 +25,9 @@ public class World
     public World() throws IOException
     {
         this.top = 0;
-        this.bottom = 600;
+        this.bottom = 9 * 64;
         this.left = 0;
-        this.right = 800;
+        this.right = 16 * 64;
         
         // make blocks (can load from file later)
         BufferedImage blockImg = ImageIO.read(new File("img/block.png"));
@@ -35,14 +35,14 @@ public class World
         int x = 0;
         int y = 550;
         
-        while (x < 800)
+        while (x < right)
         {
-            blockList.add(new Block(x, 500, blockImg));
+            blockList.add(new Block(x, 8 * 64, blockImg));
             x += 64;
         }
         
-        blockList.add(new Block(192, 372, blockImg));
-        blockList.add(new Block(704, 436, blockImg));
+        blockList.add(new Block(3 * 64, 6 * 64, blockImg));
+        blockList.add(new Block(10 * 64, 7 * 64, blockImg));
     }
 
     public int getTop()
