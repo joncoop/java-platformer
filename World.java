@@ -20,7 +20,7 @@ public class World
     private int left;
     private double gravity = 1.0;
     
-    private SpriteGroup blockList = new SpriteGroup();
+    private ArrayList<Sprite> blockList = new ArrayList<Sprite>();
             
     public World() throws IOException
     {
@@ -68,7 +68,7 @@ public class World
         return gravity;
     }
     
-    public SpriteGroup getAllBlocks()
+    public ArrayList<Sprite> getAllBlocks()
     {   
         return blockList;
     } 

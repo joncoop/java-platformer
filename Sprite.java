@@ -1,9 +1,11 @@
+
 /**
  * Abstract class Sprite - write a description of the class here
  * 
  * @author (your name here)
  * @version (version number or date here)
  */
+
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -45,14 +47,15 @@ public abstract class Sprite
         return this.rect.intersects(other.rect);
     }
     
-    public ArrayList<Sprite> getCollisionList(ArrayList<Sprite> spriteList) {
-       ArrayList<Sprite> collidedSprites = new ArrayList<Sprite>();
-       
-       for (Sprite s : spriteList)
-           if (this.collidesWith(s))
-               collidedSprites.add(s);
+    public ArrayList<Sprite> getCollisionList(ArrayList<Sprite> spriteList) 
+    {
+        ArrayList<Sprite> collidedSprites = new ArrayList<Sprite>();
         
-       return collidedSprites;
+        for (Sprite s : spriteList)
+            if (this.collidesWith(s))
+                collidedSprites.add(s);
+        
+        return collidedSprites;
     }
     
     public void paint(Graphics g)
@@ -61,4 +64,5 @@ public abstract class Sprite
     }
     
     public abstract void update();
+
 }

@@ -49,14 +49,12 @@ public class Character extends Sprite
         
             
         // process blocks
-        /* not working because of type errors, need SpriteGroup
-        ArrayList<Block> blockList = world.getAllBlocks();
+        ArrayList<Sprite> blockList = world.getAllBlocks();
         ArrayList<Sprite> blockHitList = getCollisionList(blockList);
         
-        for (Block hit : blockHitList)
+        for (Sprite hit : blockHitList)
             // do something
             ;
-         */
         
         moveTo(nextX, nextY);
     }
