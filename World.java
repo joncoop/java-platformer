@@ -75,5 +75,11 @@ public class World
     public ArrayList<Sprite> getAllBlocks()
     {   
         return blockList;
-    } 
+    }
+    
+    public void paint(Graphics g)
+    {
+        for (Sprite block : blockList)
+            block.paint(g);
+    }
 }

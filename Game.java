@@ -45,10 +45,7 @@ public class Game extends JPanel
     public void paint(Graphics g) 
     {
         super.paint(g);
-                
-        for (Sprite block : world.getAllBlocks())
-            block.paint(g);
-
+        world.paint(g);
         player.paint(g);
     }
     
@@ -56,19 +53,16 @@ public class Game extends JPanel
     {
         while (true)
         {
-            // get input
-            
-            // game logic
+            // update game objects
             player.update();
             
             // draw stuff
             repaint();
 
+            // wait a bit
             Thread.sleep(10);
         }
     }
-    
-
     
     public World getWorld()
     {
