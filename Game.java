@@ -75,7 +75,6 @@ public class Game extends JPanel  implements KeyListener
            player.setVx(5);
     }
     
-    // from the KeyListener interface
     public void keyReleased(KeyEvent e) {
         int code = e.getExtendedKeyCode();
         
@@ -91,7 +90,6 @@ public class Game extends JPanel  implements KeyListener
         
     }
     
-    // from the KeyListener interface
     public void keyTyped(KeyEvent e) {
     
     }
