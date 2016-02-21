@@ -20,6 +20,7 @@ public class Game extends JPanel  implements KeyListener
 {
     private JFrame frame;
     private Character player;
+    private World world;
     
     public Game() throws IOException
     {
@@ -46,7 +47,6 @@ public class Game extends JPanel  implements KeyListener
     
     public void play() throws InterruptedException
     {
-        System.out.println("Game started");
         while (true)
         {
             // get input

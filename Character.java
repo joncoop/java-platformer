@@ -27,7 +27,22 @@ public class Character extends Sprite
 
     public void update()
     {
-        move(vx, vy);
+        int nextX = (int)getRect().getX() + vx;
+        int nextY = (int)getRect().getY() + vy;
+        int width = (int)getRect().getWidth();
+        int height = (int)getRect().getHeight();
+        
+        if (nextX < world.getLeft())
+            nextX = world.getLeft();
+        else if (nextX + width > world.getRight())
+            nextX = world.getRight() - width;
+            
+        if (nextY < world.getTop())
+            nextY = world.getTop();
+        else if (nextY + height > world.getBottom())
+            nextY = world.getBottom() - height;
+        
+        moveTo(nextX, nextY);
     }
     
     public void setVx(int vx)

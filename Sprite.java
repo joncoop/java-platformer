@@ -28,6 +28,11 @@ public abstract class Sprite
         this.rect = new Rectangle(x, y, w, h);
     }
     
+    public Rectangle getRect()
+    {
+        return rect;
+    }
+    
     public void move(int dx, int dy)
     {
         rect.translate(dx, dy);
