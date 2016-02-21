@@ -23,6 +23,7 @@ public class World
     private int left;
     private double gravity = 1.0;
     
+    private Sprite player;
     private List<Sprite> blockList = new ArrayList<Sprite>();
     private List<Sprite> coinList = new ArrayList<Sprite>();
     private List<Sprite> enemyList = new ArrayList<Sprite>();
@@ -60,7 +61,12 @@ public class World
         BufferedImage enemyImg = ImageIO.read(new File("img/slime.png"));
         
         enemyList.add(new Enemy(3 * 64, 7 * 64, enemyImg, this));      
-}
+    }
+    
+    public void addPlayer(Character player)
+    {
+        this.player = player;
+    }
 
     public int getTop()
     {
@@ -107,10 +113,14 @@ public class World
             
         for (Sprite enemy : enemyList)
             enemy.paint(g);
+            
+        player.paint(g);
     }
     
     public void update()
     {
+        player.update();
+        
         for (Sprite enemy : enemyList)
             enemy.update();        
     }

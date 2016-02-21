@@ -37,6 +37,8 @@ public class Game extends JPanel
         BufferedImage playerImg = ImageIO.read(new File("img/baby_tux.png"));
         player = new Character(7 * 64, 7 * 64, playerImg, world);
 
+        world.addPlayer(player);
+        
         addKeyListener(new InputHandler(player));
         requestFocus();
     }
@@ -45,27 +47,15 @@ public class Game extends JPanel
     {
         super.paint(g);
         world.paint(g);
-        player.paint(g);
     }
     
     public void play() throws InterruptedException
     {
         while (true)
         {
-            // update game objects
-            player.update();
             world.update();
-            
-            // draw stuff
             repaint();
-
-            // wait a bit
             Thread.sleep(10);
         }
-    }
-    
-    public World getWorld()
-    {
-        return world;
     }
 }
