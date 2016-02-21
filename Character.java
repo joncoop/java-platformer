@@ -15,6 +15,8 @@ public class Character extends Sprite
 {
     private World world;
     private int vx, vy;
+    private int runSpeed = 5;
+    private int jumpPower = 20;
     
     public Character(int x, int y, BufferedImage img, World world)
     {
@@ -49,13 +51,23 @@ public class Character extends Sprite
         moveTo(nextX, nextY);
     }
     
-    public void setVx(int vx)
+    public void moveRight()
     {
-        this.vx = vx;
+        vx = runSpeed;
     }
 
-    public void setVy(int vy)
+    public void moveLeft()
     {
-        this.vy = vy;
+        vx = -runSpeed;
+    }
+    
+    public void jump()
+    {
+        vy = -jumpPower;
+    }
+    
+    public void stop()
+    {
+        vx = 0;
     }
 }

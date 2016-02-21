@@ -65,12 +65,13 @@ public class Game extends JPanel  implements KeyListener
         int code = e.getExtendedKeyCode();
         
         if (code == KeyEvent.VK_LEFT)
-            player.setVx(-5);
+            player.moveLeft();
+
         if (code == KeyEvent.VK_RIGHT)
-           player.setVx(5);
+           player.moveRight();
            
         if (code == KeyEvent.VK_SPACE)
-           player.setVy(-20);
+           player.jump();
  
     }
     
@@ -78,9 +79,9 @@ public class Game extends JPanel  implements KeyListener
         int code = e.getExtendedKeyCode();
         
         if (code == KeyEvent.VK_LEFT)
-            player.setVx(0);
+            player.stop();
         if (code == KeyEvent.VK_RIGHT)
-           player.setVx(0);
+            player.stop();
         
     }
     
