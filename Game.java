@@ -68,6 +68,10 @@ public class Game extends JPanel  implements KeyListener
             player.setVx(-5);
         if (code == KeyEvent.VK_RIGHT)
            player.setVx(5);
+           
+        if (code == KeyEvent.VK_SPACE)
+           player.setVy(-20);
+ 
     }
     
     public void keyReleased(KeyEvent e) {
