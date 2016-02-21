@@ -47,12 +47,11 @@ public class Game extends JPanel implements KeyListener
     public void paint(Graphics g) 
     {
         super.paint(g);
-        
-        player.paint(g);
-        
+                
         for (Sprite block : world.getAllBlocks())
             block.paint(g);
 
+        player.paint(g);
     }
     
     public void play() throws InterruptedException

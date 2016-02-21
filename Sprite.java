@@ -7,92 +7,80 @@
  *      <https://github.com/joncoop/java-platformer>.
  */
 
-
-import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public abstract class Sprite
 {
     private BufferedImage img;
-    private Rectangle rect;
+    private int x, y;
     
     public Sprite(int x, int y, BufferedImage img)
     {
-        int w = img.getWidth();
-        int h = img.getHeight();
-        
+        this.x = x;
+        this.y = y;
         this.img = img;
-        this.rect = new Rectangle(x, y, w, h);
     }
     
     public void move(int dx, int dy)
     {
-        rect.translate(dx, dy);
+        x += dx;
+        y += dy;
     }
     
     public void moveTo(int x, int y)
     {
-        rect.setLocation(x, y);
+        this.x = x;
+        this.y = y;
     }
     
     public void setRectTop(int top)
     {
-        int x = (int) (rect.getX());
-        int y = top;
-        
-        rect.setLocation(x, y);
+        y = top;
     }
     
     public void setRectRight(int right)
     {
-        int x = (int) (right - rect.getWidth());
-        int y = (int) (rect.getY());
-        
-        rect.setLocation(x, y);
+        x = right - img.getWidth();
     }
     
     public void setRectBottom(int bottom)
     {
-        int x = (int) (rect.getX());
-        int y = (int) (bottom - rect.getHeight());
-        
-        rect.setLocation(x, y);
+        y = bottom - img.getHeight();
     }
     
     public void setRectLeft(int left)
     {
-        int x = left;
-        int y = (int) (rect.getY());
-        
-        rect.setLocation(x, y);
+        x = left;
     }
     
     public int getRectTop()
     {
-        return (int) (rect.getY());
+        return y;
     }
     
     public int getRectRight()
     {
-        return (int) (rect.getX() + rect.getWidth());
+        return x + img.getWidth();
     }
     
     public int getRectBottom()
     {
-        return (int) (rect.getY() + rect.getHeight());
+        return y + img.getHeight();
     }
     
     public int getRectLeft()
     {
-        return (int) (rect.getX());
+        return x;
     }
     
     public boolean collidesWith(Sprite other)
     {
-        return this.rect.intersects(other.rect);
+        return !( this.getRectLeft()   >= other.getRectRight()  ||
+                  this.getRectRight()  <= other.getRectLeft()   ||
+                  this.getRectTop()    >= other.getRectBottom() ||
+                  this.getRectBottom() <= other.getRectTop() );
     }
     
     public ArrayList<Sprite> getCollisionList(ArrayList<Sprite> spriteList) 
@@ -108,7 +96,7 @@ public abstract class Sprite
     
     public void paint(Graphics g)
     {
-        g.drawImage(img, (int)rect.getX(), (int)rect.getY(), (int)rect.getWidth(), (int)rect.getHeight(), null);   
+        g.drawImage(img, x, y, img.getWidth(), img.getHeight(), null);   
     }
     
     public abstract void update();

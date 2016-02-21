@@ -26,7 +26,7 @@ public class Character extends Sprite
         vy = 0;
     }
 
-    public void processBlocks()
+    public void moveAndProcessBlocks()
     {
         World world = game.getWorld();
         ArrayList<Sprite> blockList = world.getAllBlocks();
@@ -34,7 +34,7 @@ public class Character extends Sprite
         
         // apply horizontal movement
         move(vx, 0);
-        
+       
         hitList = getCollisionList(blockList);
         
         for (Sprite hit : hitList)
@@ -45,10 +45,10 @@ public class Character extends Sprite
                 setRectLeft(hit.getRectRight());
         }
         
-        // apply gravity
+        // apply gravity and vertical movement
         vy += world.getGravity();
         move(0, vy);
-   
+        
         hitList = getCollisionList(blockList);
         
         for (Sprite hit : hitList)
@@ -58,7 +58,7 @@ public class Character extends Sprite
             else if (vy < 0)
                 setRectTop(hit.getRectBottom());
             vy = 0;
-        }        
+        }
     }
     
     public void processEnemies()
@@ -88,7 +88,7 @@ public class Character extends Sprite
     
     public void update()
     {
-        processBlocks();
+        moveAndProcessBlocks();
         processEnemies();
         processCoins();
         checkWorldBoundaries();
