@@ -23,7 +23,6 @@ public class Game extends JPanel implements KeyListener
     private JFrame frame;
     private Character player;
     private World world;
-    private ArrayList<Sprite> blockList = new ArrayList<Sprite>();
     
     public Game() throws IOException
     {
@@ -41,9 +40,6 @@ public class Game extends JPanel implements KeyListener
         BufferedImage playerImg = ImageIO.read(new File("img/baby_tux.png"));
         player = new Character(384, 200, playerImg, this);
 
-        // get block list
-        blockList = world.getAllBlocks();
-        
         addKeyListener(this);
         requestFocus();
     }
@@ -53,7 +49,8 @@ public class Game extends JPanel implements KeyListener
         super.paint(g);
         
         player.paint(g);
-        for (Sprite block : blockList)
+        
+        for (Sprite block : world.getAllBlocks())
             block.paint(g);
 
     }
