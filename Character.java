@@ -30,7 +30,6 @@ public class Character extends Sprite
         ArrayList<Sprite> blockList = world.getAllBlocks();
         ArrayList<Sprite> blockHitList;
         
-        
         // apply horizontal movement
         move(vx, 0);
         
@@ -58,7 +57,13 @@ public class Character extends Sprite
                 moveTo((int)this.getRect().getX(), (int)(hit.getRect().getY() + hit.getRect().getHeight()));
             vy = 0;
         }
-       
+        
+        // check enemy hits
+        
+        
+        // check coin hits
+        
+        
         // check world boundaries
         if (this.getRect().getX() < world.getLeft())
            moveTo((int)world.getLeft(), (int)this.getRect().getY());
