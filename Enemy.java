@@ -8,6 +8,7 @@
  */
 
 import java.awt.image.BufferedImage;
+import java.util.List;
 import java.util.ArrayList;
 
 public class Enemy extends Sprite
@@ -30,8 +31,8 @@ public class Enemy extends Sprite
     
     public void moveAndProcessBlocks()
     {
-        ArrayList<Sprite> blockList = world.getAllBlocks();
-        ArrayList<Sprite> hitList;
+        List<Sprite> blockList = world.getAllBlocks();
+        List<Sprite> hitList;
         
         // apply horizontal movement
         move(vx, 0);

@@ -8,6 +8,7 @@
  */
 
 import java.awt.image.BufferedImage;
+import java.util.List;
 import java.util.ArrayList;
 
 public class Character extends Sprite
@@ -26,10 +27,30 @@ public class Character extends Sprite
         vy = 0;
     }
 
+    public void moveRight()
+    {
+        vx = runSpeed;
+    }
+
+    public void moveLeft()
+    {
+        vx = -runSpeed;
+    }
+    
+    public void jump()
+    {
+        vy = -jumpPower;
+    }
+    
+    public void stop()
+    {
+        vx = 0;
+    }
+    
     public void moveAndProcessBlocks()
     {
-        ArrayList<Sprite> blockList = world.getAllBlocks();
-        ArrayList<Sprite> hitList;
+        List<Sprite> blockList = world.getAllBlocks();
+        List<Sprite> hitList;
         
         // apply horizontal movement
         move(vx, 0);
@@ -67,8 +88,8 @@ public class Character extends Sprite
     
     public void processCoins()
     {
-        ArrayList<Sprite> coinList = world.getAllCoins();
-        ArrayList<Sprite> hitList = getCollisionList(coinList);
+        List<Sprite> coinList = world.getAllCoins();
+        List<Sprite> hitList = getCollisionList(coinList);
         
         for (Sprite coin : hitList)
         {
@@ -96,25 +117,5 @@ public class Character extends Sprite
         processEnemies();
         processCoins();
         checkWorldBoundaries();
-    }
-    
-    public void moveRight()
-    {
-        vx = runSpeed;
-    }
-
-    public void moveLeft()
-    {
-        vx = -runSpeed;
-    }
-    
-    public void jump()
-    {
-        vy = -jumpPower;
-    }
-    
-    public void stop()
-    {
-        vx = 0;
     }
 }

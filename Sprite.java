@@ -9,6 +9,7 @@
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.util.List;
 import java.util.ArrayList;
 
 public abstract class Sprite
@@ -83,9 +84,9 @@ public abstract class Sprite
                   this.getRectBottom() <= other.getRectTop() );
     }
     
-    public ArrayList<Sprite> getCollisionList(ArrayList<Sprite> spriteList) 
+    public List<Sprite> getCollisionList(List<Sprite> spriteList) 
     {
-        ArrayList<Sprite> collidedSprites = new ArrayList<Sprite>();
+        List<Sprite> collidedSprites = new ArrayList<Sprite>();
         
         for (Sprite s : spriteList)
             if (this.collidesWith(s))

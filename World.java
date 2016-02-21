@@ -8,6 +8,7 @@
  */
 
 import java.awt.Graphics;
+import java.util.List;
 import java.util.ArrayList;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -22,9 +23,9 @@ public class World
     private int left;
     private double gravity = 1.0;
     
-    private ArrayList<Sprite> blockList = new ArrayList<Sprite>();
-    private ArrayList<Sprite> coinList = new ArrayList<Sprite>();
-    private ArrayList<Sprite> enemyList = new ArrayList<Sprite>();
+    private List<Sprite> blockList = new ArrayList<Sprite>();
+    private List<Sprite> coinList = new ArrayList<Sprite>();
+    private List<Sprite> enemyList = new ArrayList<Sprite>();
             
     public World() throws IOException
     {
@@ -86,12 +87,12 @@ public class World
         return gravity;
     }
     
-    public ArrayList<Sprite> getAllBlocks()
+    public List<Sprite> getAllBlocks()
     {   
         return blockList;
     }
     
-    public ArrayList<Sprite> getAllCoins()
+    public List<Sprite> getAllCoins()
     {   
         return coinList;
     }
