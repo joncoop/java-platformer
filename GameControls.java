@@ -21,17 +21,17 @@ public class GameControls implements KeyListener
     
     public void keyPressed(KeyEvent e) 
     {
+        // do nothing
+    }
+    
+    public void keyReleased(KeyEvent e) 
+    {
         int code = e.getExtendedKeyCode();
         
         if (game.getState() == game.START)
             game.setState(game.PLAYING);
         else if (code == KeyEvent.VK_P)
             game.togglePause();
-    }
-    
-    public void keyReleased(KeyEvent e) 
-    {
-        // do nothing
     }
     
     public void keyTyped(KeyEvent e) 

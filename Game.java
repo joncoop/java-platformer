@@ -25,7 +25,7 @@ public class Game extends JPanel
     private JFrame frame;
     private Character player;
     private World world;
-    private int state = START;
+    private int state;
     
     public Game(String title) throws IOException
     {
@@ -47,7 +47,10 @@ public class Game extends JPanel
         
         // add input handlers
         addKeyListener(new GameControls(this));
-        addKeyListener(new PlayerControls(player));
+        addKeyListener(new PlayerControls(player, this));
+        
+        // set game state
+        state = START;
         
         // request focus
         requestFocus();
