@@ -23,6 +23,7 @@ public class World
     private double gravity = 1.0;
     
     private ArrayList<Sprite> blockList = new ArrayList<Sprite>();
+    private ArrayList<Sprite> coinList = new ArrayList<Sprite>();
             
     public World() throws IOException
     {
@@ -45,6 +46,13 @@ public class World
         
         blockList.add(new Block(3 * 64, 6 * 64, blockImg));
         blockList.add(new Block(10 * 64, 7 * 64, blockImg));
+        
+        // make some coins
+        BufferedImage coinImg = ImageIO.read(new File("img/coin.png"));
+        
+        coinList.add(new Coin(3 * 64, 2 * 64, coinImg));
+        coinList.add(new Coin(5 * 64, 4 * 64, coinImg));
+        coinList.add(new Coin(10 * 64, 5 * 64, coinImg));        
     }
 
     public int getTop()
@@ -81,5 +89,8 @@ public class World
     {
         for (Sprite block : blockList)
             block.paint(g);
+            
+        for (Sprite coin : coinList)
+            coin.paint(g);
     }
 }
