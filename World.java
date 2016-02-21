@@ -107,4 +107,10 @@ public class World
         for (Sprite enemy : enemyList)
             enemy.paint(g);
     }
+    
+    public void update()
+    {
+        for (Sprite enemy : enemyList)
+            enemy.update();        
+    }
 }

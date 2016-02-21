@@ -54,6 +54,7 @@ public class Game extends JPanel
         {
             // update game objects
             player.update();
+            world.update();
             
             // draw stuff
             repaint();
