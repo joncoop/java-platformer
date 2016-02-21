@@ -72,10 +72,10 @@ public class Game extends JPanel
     
     public void togglePause()
     {
-        if (state != PLAYING)
-            state = PLAYING;
-        else
+        if (state == PLAYING)
             state = PAUSED;
+        else if (state == PAUSED
+            state = PLAYING;
     }
     
     public void play() throws InterruptedException
