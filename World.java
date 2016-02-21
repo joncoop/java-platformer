@@ -27,7 +27,6 @@ public class World
         return top;
     }
 
-
     public int getRight()
     {
         return right;
