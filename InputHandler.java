@@ -13,38 +13,46 @@ import java.awt.event.KeyListener;
 public class InputHandler implements KeyListener
 {
     Character player;
+    Game game;
     
-    public InputHandler(Character player)
+    public InputHandler(Character player, Game game)
     {
         this.player = player;
+        this.game = game;
     }
     
-    public void keyPressed(KeyEvent e) {
+    public void keyPressed(KeyEvent e) 
+    {
         int code = e.getExtendedKeyCode();
         
         if (code == KeyEvent.VK_LEFT)
             player.moveLeft();
-
-        if (code == KeyEvent.VK_RIGHT)
+            
+        else if (code == KeyEvent.VK_RIGHT)
            player.moveRight();
            
-        if (code == KeyEvent.VK_SPACE)
+        else if (code == KeyEvent.VK_SPACE)
            player.jump();
  
     }
     
-    public void keyReleased(KeyEvent e) {
+    public void keyReleased(KeyEvent e) 
+    {
         int code = e.getExtendedKeyCode();
         
         if (code == KeyEvent.VK_LEFT)
             player.stop();
             
-        if (code == KeyEvent.VK_RIGHT)
+        else if (code == KeyEvent.VK_RIGHT)
             player.stop();
+            
+        else if (code == KeyEvent.VK_P)
+            game.togglePause();
         
     }
     
-    public void keyTyped(KeyEvent e) {
-        // does nothing
+    public void keyTyped(KeyEvent e) 
+    {
+        // do nothing
     }
-}
+}  

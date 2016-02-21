@@ -31,7 +31,7 @@ public class World
     private List<Sprite> blockList = new ArrayList<Sprite>();
     private List<Sprite> coinList = new ArrayList<Sprite>();
     private List<Sprite> enemyList = new ArrayList<Sprite>();
-            
+    
     public World() throws IOException
     {
         /*

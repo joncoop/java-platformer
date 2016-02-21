@@ -17,9 +17,15 @@ import javax.imageio.ImageIO;
 
 public class Game extends JPanel
 {
+    private static int START = 0;
+    private static int PLAYING = 1;
+    private static int PAUSED = 2;
+    private static int END = 3;
+    
     private JFrame frame;
     private Character player;
     private World world;
+    private int state = PLAYING;
     
     public Game(String title) throws IOException
     {
@@ -39,23 +45,35 @@ public class Game extends JPanel
 
         world.addPlayer(player);
         
-        addKeyListener(new InputHandler(player));
+        addKeyListener(new InputHandler(player, this));
         requestFocus();
     }
     
-    public void paint(Graphics g) 
+    public void togglePause()
     {
-        super.paint(g);
-        world.paint(g);
+        if (state != PLAYING)
+            state = PLAYING;
+        else
+            state = PAUSED;
     }
     
     public void play() throws InterruptedException
     {
         while (true)
         {
-            world.update();
+            if (state == PLAYING)
+            {
+                world.update();
+            }
+            
             repaint();
             Thread.sleep(10);
         }
+    }
+    
+    public void paint(Graphics g) 
+    {
+        super.paint(g);
+        world.paint(g);
     }
 }
