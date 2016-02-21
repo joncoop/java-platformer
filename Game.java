@@ -1,8 +1,10 @@
 /**
- * Write a description of class Application here.
+ * Copyright (c) 2016 Jon Cooper
+ *  
+ * This file is part of java-platformer.
+ * Documentation, related files, and licensing can be found at
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ *      <https://github.com/joncoop/java-platformer>.
  */
 
 import java.awt.image.BufferedImage;

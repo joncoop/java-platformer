@@ -1,9 +1,10 @@
-
 /**
- * Abstract class Sprite - write a description of the class here
+ * Copyright (c) 2016 Jon Cooper
+ *  
+ * This file is part of java-platformer.
+ * Documentation, related files, and licensing can be found at
  * 
- * @author (your name here)
- * @version (version number or date here)
+ *      <https://github.com/joncoop/java-platformer>.
  */
 
 
