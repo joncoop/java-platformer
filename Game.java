@@ -14,7 +14,6 @@ import javax.swing.JPanel;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
-import java.util.ArrayList;
 
 public class Game extends JPanel
 {
