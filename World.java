@@ -17,12 +17,16 @@ import javax.imageio.ImageIO;
 
 public class World
 {
+    // world boundaries
     private int top;
     private int bottom;
     private int right;
     private int left;
+    
+    // world physics
     private double gravity = 1.0;
     
+    // world objects
     private Sprite player;
     private List<Sprite> blockList = new ArrayList<Sprite>();
     private List<Sprite> coinList = new ArrayList<Sprite>();
@@ -30,36 +34,36 @@ public class World
             
     public World() throws IOException
     {
+        /*
+         * Everything in this constructor can load from a file later.
+         */
+        
+        // set boundaries
         this.top = 0;
         this.bottom = 9 * 64;
         this.left = 0;
         this.right = 16 * 64;
         
-        // make blocks (can load from file later)
+        // make blocks
         BufferedImage blockImg = ImageIO.read(new File("img/block.png"));
-        
         int x = 0;
         int y = 550;
-        
         while (x < right)
         {
             blockList.add(new Block(x, 8 * 64, blockImg));
             x += 64;
         }
-        
         blockList.add(new Block(3 * 64, 6 * 64, blockImg));
         blockList.add(new Block(10 * 64, 7 * 64, blockImg));
         
         // make some coins
         BufferedImage coinImg = ImageIO.read(new File("img/coin.png"));
-        
         coinList.add(new Coin(3 * 64, 2 * 64, coinImg));
         coinList.add(new Coin(5 * 64, 4 * 64, coinImg));
         coinList.add(new Coin(10 * 64, 5 * 64, coinImg));       
 
         // make some enemies
-        BufferedImage enemyImg = ImageIO.read(new File("img/slime.png"));
-        
+        BufferedImage enemyImg = ImageIO.read(new File("img/slime.png")); 
         enemyList.add(new Enemy(3 * 64, 7 * 64, enemyImg, this));      
     }
     
