@@ -26,7 +26,7 @@ public class GameControls implements KeyListener
     
     public void keyReleased(KeyEvent e) 
     {
-        int code = e.getExtendedKeyCode();
+        int code = e.getKeyCode();
         
         if (game.getState() == game.START)
             game.setState(game.PLAYING);

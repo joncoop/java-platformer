@@ -25,7 +25,7 @@ public class PlayerControls implements KeyListener
     {
         if (game.getState() == game.PLAYING)
         {
-            int code = e.getExtendedKeyCode();
+            int code = e.getKeyCode();
             
             if (code == KeyEvent.VK_LEFT)
                 player.moveLeft();   
@@ -40,7 +40,7 @@ public class PlayerControls implements KeyListener
     {
        if (game.getState() == game.PLAYING)
        {
-            int code = e.getExtendedKeyCode();
+            int code = e.getKeyCode();
             
             if (code == KeyEvent.VK_LEFT)
                 player.stop();    
