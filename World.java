@@ -37,10 +37,12 @@ public class World
         
         while (x < 800)
         {
-            Block b = new Block(x, 500, blockImg);
-            blockList.add(b);
-            x += b.getRect().getWidth();
+            blockList.add(new Block(x, 500, blockImg));
+            x += 64;
         }
+        
+        blockList.add(new Block(192, 372, blockImg));
+        blockList.add(new Block(704, 436, blockImg));
     }
 
     public int getTop()

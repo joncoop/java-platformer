@@ -27,36 +27,49 @@ public class Character extends Sprite
     public void update()
     {
         World world = game.getWorld();
-
-        // apply gravity
-        vy += world.getGravity();
-        
-        // check world boundaries
-        int nextX = (int)getRect().getX() + vx;
-        int nextY = (int)getRect().getY() + vy;
-        int width = (int)getRect().getWidth();
-        int height = (int)getRect().getHeight();
-        
-        if (nextX < world.getLeft())
-            nextX = world.getLeft();
-        else if (nextX + width > world.getRight())
-            nextX = world.getRight() - width;
-            
-        if (nextY < world.getTop())
-            nextY = world.getTop();
-        else if (nextY + height > world.getBottom())
-            nextY = world.getBottom() - height;
-        
-            
-        // process blocks
         ArrayList<Sprite> blockList = world.getAllBlocks();
-        ArrayList<Sprite> blockHitList = getCollisionList(blockList);
+        ArrayList<Sprite> blockHitList;
+        
+        
+        // apply horizontal movement
+        move(vx, 0);
+        
+        blockHitList = getCollisionList(blockList);
         
         for (Sprite hit : blockHitList)
-            // do something
-            ;
+        {
+            if (vx > 0)
+                moveTo((int)(hit.getRect().getX() - this.getRect().getWidth()), (int)this.getRect().getY());
+            else if (vx < 0)
+                moveTo((int)(hit.getRect().getX() + hit.getRect().getWidth()), (int)this.getRect().getY());
+        }
         
-        moveTo(nextX, nextY);
+        // apply gravity
+        vy += world.getGravity();
+        move(0, vy);
+   
+        blockHitList = getCollisionList(blockList);
+        
+        for (Sprite hit : blockHitList)
+        {
+            if (vy > 0)
+                moveTo((int)this.getRect().getX(), (int)(hit.getRect().getY() - this.getRect().getHeight()));
+            else if (vy < 0)
+                moveTo((int)this.getRect().getX(), (int)(hit.getRect().getY() + hit.getRect().getHeight()));
+            vy = 0;
+        }
+       
+        // check world boundaries
+        if (this.getRect().getX() < world.getLeft())
+           moveTo((int)world.getLeft(), (int)this.getRect().getY());
+        else if (this.getRect().getX() + this.getRect().getWidth() > world.getRight())
+           moveTo((int)(world.getRight() - this.getRect().getWidth()), (int)this.getRect().getY());
+            
+        if (this.getRect().getY() < world.getTop())
+            moveTo((int)this.getRect().getX(), world.getTop());
+        else if (this.getRect().getY() + this.getRect().getHeight() > world.getBottom())
+            moveTo((int)this.getRect().getX(), (int)(world.getBottom() - this.getRect().getHeight()));
+            
     }
     
     public void moveRight()
