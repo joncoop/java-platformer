@@ -90,7 +90,7 @@ public class Game extends JPanel
     
     public void paint(Graphics g) 
     {
-        super.paint(g);
+        super.paint(g); // doesn't seem to do much other than clear the JPanel
         world.paint(g);
     }
 }

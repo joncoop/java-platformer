@@ -7,6 +7,7 @@
  *      <https://github.com/joncoop/java-platformer>.
  */
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.util.List;
 import java.util.ArrayList;
@@ -109,6 +110,9 @@ public class World
     
     public void paint(Graphics g)
     {
+        g.setColor(new Color(125, 200, 255)); // sky blue
+        g.fillRect(left, top, right, bottom);
+            
         for (Sprite block : blockList)
             block.paint(g);
             
