@@ -14,11 +14,9 @@ import javax.swing.JPanel;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
-public class Game extends JPanel implements KeyListener
+public class Game extends JPanel
 {
     private JFrame frame;
     private Character player;
@@ -40,7 +38,7 @@ public class Game extends JPanel implements KeyListener
         BufferedImage playerImg = ImageIO.read(new File("img/baby_tux.png"));
         player = new Character(384, 200, playerImg, this);
 
-        addKeyListener(this);
+        addKeyListener(new InputHandler(player));
         requestFocus();
     }
     
@@ -70,34 +68,7 @@ public class Game extends JPanel implements KeyListener
         }
     }
     
-    public void keyPressed(KeyEvent e) {
-        int code = e.getExtendedKeyCode();
-        
-        if (code == KeyEvent.VK_LEFT)
-            player.moveLeft();
 
-        if (code == KeyEvent.VK_RIGHT)
-           player.moveRight();
-           
-        if (code == KeyEvent.VK_SPACE)
-           player.jump();
- 
-    }
-    
-    public void keyReleased(KeyEvent e) {
-        int code = e.getExtendedKeyCode();
-        
-        if (code == KeyEvent.VK_LEFT)
-            player.stop();
-            
-        if (code == KeyEvent.VK_RIGHT)
-            player.stop();
-        
-    }
-    
-    public void keyTyped(KeyEvent e) {
-        // does nothing
-    }
     
     public World getWorld()
     {
