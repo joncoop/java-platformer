@@ -39,7 +39,18 @@ public class Character extends Sprite
     
     public void jump()
     {
-        vy = -jumpPower;
+        // nudge down 1 px
+        move(0, 1);
+        
+        List<Sprite> blockList = world.getAllBlocks();
+        List<Sprite> hitList = getCollisionList(blockList);
+        
+        // jump if intersects with block
+        if (hitList.size() > 0)
+            vy = -jumpPower;
+            
+        // nudge back up to original position
+        move(0, -1);
     }
     
     public void stop()
