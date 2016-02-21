@@ -10,12 +10,12 @@
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class PlayerControls implements KeyListener
+public class CharacterControls implements KeyListener
 {
     Character player;
     Game game;
     
-    public PlayerControls(Character player, Game game)
+    public CharacterControls(Character player, Game game)
     {
         this.player = player;
         this.game = game;

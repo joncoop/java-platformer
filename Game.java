@@ -51,7 +51,7 @@ public class Game extends JPanel
         
         // add input handlers
         addKeyListener(new GameControls(this));
-        addKeyListener(new PlayerControls(character, this));
+        addKeyListener(new CharacterControls(character, this));
         
         // set game state
         state = START;

@@ -108,8 +108,6 @@ public class Character extends Sprite
         {
             player.addPoints(((Coin)hit).getValue());
             coinList.remove(hit);
-            
-            System.out.println(player.getScore());
         }
         
     }
