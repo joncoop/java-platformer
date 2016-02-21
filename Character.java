@@ -68,6 +68,14 @@ public class Character extends Sprite
     
     public void processCoins()
     {
+        World world = game.getWorld();
+        ArrayList<Sprite> coinList = world.getAllCoins();
+        ArrayList<Sprite> hitList = getCollisionList(coinList);
+        
+        for (Sprite coin : hitList)
+        {
+            coinList.remove(coin);
+        }
         
     }
     

@@ -85,6 +85,11 @@ public class World
         return blockList;
     }
     
+    public ArrayList<Sprite> getAllCoins()
+    {   
+        return coinList;
+    }
+    
     public void paint(Graphics g)
     {
         for (Sprite block : blockList)
