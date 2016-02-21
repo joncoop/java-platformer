@@ -1,4 +1,3 @@
-
 /**
  * Write a description of class Enemy here.
  * 
@@ -7,13 +6,13 @@
  */
 public class Enemy extends Sprite
 {
-
-    /**
-     * Constructor for objects of class Enemy
-     */
     public Enemy()
     {
 
     }
 
+    public void update()
+    {
+        
+    }
 }

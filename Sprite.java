@@ -1,4 +1,3 @@
-
 /**
  * Abstract class Sprite - write a description of the class here
  * 
@@ -6,13 +5,11 @@
  * @version (version number or date here)
  */
 
-
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-
 
 public abstract class Sprite
 {
@@ -64,5 +61,4 @@ public abstract class Sprite
     }
     
     public abstract void update();
-
 }

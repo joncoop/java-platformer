@@ -1,4 +1,3 @@
-
 /**
  * Write a description of class World here.
  * 
@@ -12,6 +11,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+
 public class World
 {
     private int top;
@@ -67,12 +67,10 @@ public class World
     {
         return gravity;
     }
-   
     
     public ArrayList<Block> getAllBlocks()
     {   
         System.out.println(blockList.size());
         return blockList;
-    }
-    
+    } 
 }
