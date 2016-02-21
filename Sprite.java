@@ -65,5 +65,17 @@ public abstract class Sprite
     }
     
     public abstract void update();
+    
+    /*
+     * Idea: Make this class behave like a Rectangle.
+     * 
+     * Methods:
+     * 
+     * getRectRight, setRectRight, getRectTop, setRectTop, etc.
+     * 
+     * This should hopefully clean up the Character update() & related methods.
+     * 
+     * move & moveTo can stay, but might be unused. (Could still be useful in other classes.
+     */
 
 }

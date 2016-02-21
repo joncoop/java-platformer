@@ -26,7 +26,7 @@ public class Character extends Sprite
         vy = 0;
     }
 
-    public void update()
+    public void processBlocks()
     {
         World world = game.getWorld();
         ArrayList<Sprite> blockList = world.getAllBlocks();
@@ -58,15 +58,23 @@ public class Character extends Sprite
             else if (vy < 0)
                 moveTo((int)this.getRect().getX(), (int)(hit.getRect().getY() + hit.getRect().getHeight()));
             vy = 0;
-        }
+        }        
+    }
+    
+    public void processEnemies()
+    {
         
-        // check enemy hits
+    }
+    
+    public void processCoins()
+    {
         
-        
-        // check coin hits
-        
-        
-        // check world boundaries
+    }
+    
+    public void checkWorldBoundaries()
+    {
+        World world = game.getWorld();
+                
         if (this.getRect().getX() < world.getLeft())
            moveTo((int)world.getLeft(), (int)this.getRect().getY());
         else if (this.getRect().getX() + this.getRect().getWidth() > world.getRight())
@@ -75,8 +83,15 @@ public class Character extends Sprite
         if (this.getRect().getY() < world.getTop())
             moveTo((int)this.getRect().getX(), world.getTop());
         else if (this.getRect().getY() + this.getRect().getHeight() > world.getBottom())
-            moveTo((int)this.getRect().getX(), (int)(world.getBottom() - this.getRect().getHeight()));
-            
+            moveTo((int)this.getRect().getX(), (int)(world.getBottom() - this.getRect().getHeight()));        
+    }
+    
+    public void update()
+    {
+        processBlocks();
+        processEnemies();
+        processCoins();
+        checkWorldBoundaries();
     }
     
     public void moveRight()
