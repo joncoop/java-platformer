@@ -15,11 +15,13 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 
 public class Game extends JPanel  implements KeyListener
 {
     private JFrame frame;
     private Character player;
+    private ArrayList<Block> blockList;
     private World world;
     
     public Game() throws IOException
@@ -33,7 +35,24 @@ public class Game extends JPanel  implements KeyListener
         World world = new World();
         
         BufferedImage playerImg = ImageIO.read(new File("img/baby_tux.png"));
-        player = new Character(384, 284, playerImg, world);
+        BufferedImage blockImg = ImageIO.read(new File("img/block.png"));
+        
+        // make player
+        player = new Character(384, 200, playerImg, world);
+        
+        
+        // make blocks
+        blockList = new ArrayList<Block>();
+        
+        int x = 0;
+        int y = 550;
+        
+        while (x < 800)
+        {
+            Block b = new Block (x, 500, blockImg);
+            blockList.add(b);
+            x += b.getRect().getWidth();
+        }
         
         addKeyListener(this);
         requestFocus();
@@ -43,6 +62,9 @@ public class Game extends JPanel  implements KeyListener
     {
         super.paint(g);
         player.paint(g);
+        
+        for (Block b : blockList)
+            b.paint(g);
     }
     
     public void play() throws InterruptedException
@@ -80,12 +102,13 @@ public class Game extends JPanel  implements KeyListener
         
         if (code == KeyEvent.VK_LEFT)
             player.stop();
+            
         if (code == KeyEvent.VK_RIGHT)
             player.stop();
         
     }
     
     public void keyTyped(KeyEvent e) {
-    
+        // does nothing
     }
 }

@@ -7,9 +7,6 @@
  */
 
 import java.awt.image.BufferedImage;
-import java.awt.Color;
-import java.awt.Graphics;
-
 
 public class Character extends Sprite
 {
