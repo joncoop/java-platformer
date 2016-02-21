@@ -21,38 +21,29 @@ public class Game extends JPanel  implements KeyListener
 {
     private JFrame frame;
     private Character player;
-    private ArrayList<Block> blockList;
     private World world;
+    private ArrayList<Block> blockList = new ArrayList<Block>();
     
     public Game() throws IOException
     {
+        // load images
+        BufferedImage playerImg = ImageIO.read(new File("img/baby_tux.png"));
+
+
+        // make Jframe
         frame = new JFrame("My Game");
         frame.add(this);
         frame.setSize(800, 600);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
+        // make world
         World world = new World();
-        
-        BufferedImage playerImg = ImageIO.read(new File("img/baby_tux.png"));
-        BufferedImage blockImg = ImageIO.read(new File("img/block.png"));
         
         // make player
         player = new Character(384, 200, playerImg, world);
-        
-        
-        // make blocks
-        blockList = new ArrayList<Block>();
-        
-        int x = 0;
-        int y = 550;
-        
-        while (x < 800)
-        {
-            Block b = new Block (x, 500, blockImg);
-            blockList.add(b);
-            x += b.getRect().getWidth();
-        }
+
+        blockList = world.getAllBlocks();
         
         addKeyListener(this);
         requestFocus();
@@ -61,10 +52,12 @@ public class Game extends JPanel  implements KeyListener
     public void paint(Graphics g) 
     {
         super.paint(g);
+        
         player.paint(g);
         
         for (Block b : blockList)
             b.paint(g);
+
     }
     
     public void play() throws InterruptedException

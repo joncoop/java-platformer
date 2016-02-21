@@ -6,7 +6,12 @@
  * @version (a version number or a date)
  */
 
-
+import java.awt.Graphics;
+import java.util.ArrayList;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 public class World
 {
     private int top;
@@ -15,12 +20,27 @@ public class World
     private int left;
     private double gravity = 1.0;
     
-    public World()
+    private Character player;
+    private ArrayList<Block> blockList;
+            
+    public World() throws IOException
     {
         this.top = 0;
         this.bottom = 600;
         this.left = 0;
         this.right = 800;
+        
+        // make blocks (can load from file later)
+        BufferedImage blockImg = ImageIO.read(new File("img/block.png"));
+        blockList = new ArrayList<Block>();
+        
+        int x = 0;
+        int y = 550;        while (x < 800)
+        {
+            Block b = new Block(x, 500, blockImg);
+            blockList.add(b);
+            x += b.getRect().getWidth();
+        }
     }
 
     public int getTop()
@@ -47,4 +67,12 @@ public class World
     {
         return gravity;
     }
+   
+    
+    public ArrayList<Block> getAllBlocks()
+    {   
+        System.out.println(blockList.size());
+        return blockList;
+    }
+    
 }
