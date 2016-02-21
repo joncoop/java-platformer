@@ -10,15 +10,13 @@
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class InputHandler implements KeyListener
+public class PlayerControls implements KeyListener
 {
     Character player;
-    Game game;
     
-    public InputHandler(Character player, Game game)
+    public PlayerControls(Character player)
     {
         this.player = player;
-        this.game = game;
     }
     
     public void keyPressed(KeyEvent e) 
@@ -26,11 +24,9 @@ public class InputHandler implements KeyListener
         int code = e.getExtendedKeyCode();
         
         if (code == KeyEvent.VK_LEFT)
-            player.moveLeft();
-            
+            player.moveLeft();   
         else if (code == KeyEvent.VK_RIGHT)
-           player.moveRight();
-           
+           player.moveRight();   
         else if (code == KeyEvent.VK_SPACE)
            player.jump();
  
@@ -41,14 +37,9 @@ public class InputHandler implements KeyListener
         int code = e.getExtendedKeyCode();
         
         if (code == KeyEvent.VK_LEFT)
-            player.stop();
-            
+            player.stop();    
         else if (code == KeyEvent.VK_RIGHT)
             player.stop();
-            
-        else if (code == KeyEvent.VK_P)
-            game.togglePause();
-        
     }
     
     public void keyTyped(KeyEvent e) 

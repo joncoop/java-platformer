@@ -17,15 +17,15 @@ import javax.imageio.ImageIO;
 
 public class Game extends JPanel
 {
-    private static int START = 0;
-    private static int PLAYING = 1;
-    private static int PAUSED = 2;
-    private static int END = 3;
+    public static final int START = 0;
+    public static final int PLAYING = 1;
+    public static final int PAUSED = 2;
+    public static final int END = 3;
     
     private JFrame frame;
     private Character player;
     private World world;
-    private int state = PLAYING;
+    private int state = START;
     
     public Game(String title) throws IOException
     {
@@ -45,8 +45,22 @@ public class Game extends JPanel
 
         world.addPlayer(player);
         
-        addKeyListener(new InputHandler(player, this));
+        // add input handlers
+        addKeyListener(new GameControls(this));
+        addKeyListener(new PlayerControls(player));
+        
+        // request focus
         requestFocus();
+    }
+    
+    public int getState()
+    {
+        return state;
+    }
+    
+    public void setState(int state)
+    {
+        this.state = state;
     }
     
     public void togglePause()
