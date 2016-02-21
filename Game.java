@@ -24,10 +24,10 @@ public class Game extends JPanel implements KeyListener
     private Character player;
     private World world;
     
-    public Game() throws IOException
+    public Game(String title) throws IOException
     {
         // make Jframe
-        frame = new JFrame("My Game");
+        frame = new JFrame(title);
         frame.add(this);
         frame.setSize(16 * 64, 9 * 64);
         frame.setVisible(true);
