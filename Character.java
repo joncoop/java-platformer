@@ -12,15 +12,15 @@ import java.util.ArrayList;
 
 public class Character extends Sprite
 {
-    private Game game;
+    private World world;
     private int vx, vy;
     private int runSpeed = 5;
     private int jumpPower = 20;
     
-    public Character(int x, int y, BufferedImage img, Game game)
+    public Character(int x, int y, BufferedImage img, World world)
     {
         super(x, y, img);
-        this.game = game;
+        this.world = world;
         
         vx = 0;
         vy = 0;
@@ -28,7 +28,6 @@ public class Character extends Sprite
 
     public void moveAndProcessBlocks()
     {
-        World world = game.getWorld();
         ArrayList<Sprite> blockList = world.getAllBlocks();
         ArrayList<Sprite> hitList;
         
@@ -68,7 +67,6 @@ public class Character extends Sprite
     
     public void processCoins()
     {
-        World world = game.getWorld();
         ArrayList<Sprite> coinList = world.getAllCoins();
         ArrayList<Sprite> hitList = getCollisionList(coinList);
         
@@ -80,9 +78,7 @@ public class Character extends Sprite
     }
     
     public void checkWorldBoundaries()
-    {
-        World world = game.getWorld();
-                
+    {          
         if (getRectLeft() < world.getLeft())
             setRectLeft(world.getLeft());
         else if (getRectRight() > world.getRight())

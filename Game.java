@@ -35,7 +35,7 @@ public class Game extends JPanel
         
         // make player
         BufferedImage playerImg = ImageIO.read(new File("img/baby_tux.png"));
-        player = new Character(7 * 64, 7 * 64, playerImg, this);
+        player = new Character(7 * 64, 7 * 64, playerImg, world);
 
         addKeyListener(new InputHandler(player));
         requestFocus();
