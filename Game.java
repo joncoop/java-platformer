@@ -44,8 +44,8 @@ public class Game extends JPanel
         player = new Player();
         
         // make character
-        BufferedImage playerImg = ImageIO.read(new File("img/baby_tux.png"));
-        character = new Character(7 * 64, 7 * 64, playerImg, world, player);
+        BufferedImage characterImg = ImageIO.read(new File("img/baby_tux.png"));
+        character = new Character(7 * 64, 7 * 64, characterImg, world, player);
 
         world.addPlayer(character);
         
