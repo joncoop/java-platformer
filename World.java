@@ -56,6 +56,11 @@ public class World
         }
         blockList.add(new Block(3 * 64, 6 * 64, blockImg));
         blockList.add(new Block(10 * 64, 7 * 64, blockImg));
+
+        blockList.add(new Block(10 * 64, 3 * 64, blockImg));
+        blockList.add(new Block(11 * 64, 3 * 64, blockImg));
+        blockList.add(new Block(12 * 64, 3 * 64, blockImg));
+        blockList.add(new Block(13 * 64, 3 * 64, blockImg));
         
         // make some coins
         BufferedImage coinImg = ImageIO.read(new File("img/coin.png"));
@@ -66,6 +71,7 @@ public class World
         // make some enemies
         BufferedImage enemyImg = ImageIO.read(new File("img/slime.png")); 
         enemyList.add(new Enemy(3 * 64, 7 * 64, enemyImg, this));      
+        enemyList.add(new Enemy(11 * 64, 2 * 64, enemyImg, this));      
     }
     
     public void addPlayer(Character player)

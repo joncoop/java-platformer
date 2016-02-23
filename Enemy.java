@@ -33,10 +33,11 @@ public class Enemy extends Sprite
     {
         List<Sprite> blockList = world.getAllBlocks();
         List<Sprite> hitList;
+        boolean rev;
         
         // apply horizontal movement
         move(vx, 0);
-       
+        rev = false;
         hitList = getCollisionList(blockList);
         
         for (Sprite hit : hitList)
@@ -46,19 +47,47 @@ public class Enemy extends Sprite
             else if (vx < 0)
                 setRectLeft(hit.getRectRight());
                 
-            reverse();
+            rev = true;
         }
-                   
+        
+        if (rev)
+            reverse();
+        
+        // check for platform edges
+        move(0, 1);
+        rev = true;
+        hitList = getCollisionList(blockList);
+        move(0, -1);
+        
+        for (Sprite hit : hitList)
+        {
+            setRectBottom(hit.getRectTop());
+            
+            if (vx < 0)
+            {
+                if (this.getRectLeft() >= hit.getRectLeft())
+                    rev = false;
+            }
+            else if (vx > 0)
+            {
+                if (this.getRectRight() <= hit.getRectRight())
+                    rev = false;
+                }
+        }
+    
+        if (rev)
+            reverse();
+        
     }
     
     public void checkWorldBoundaries()
     {                
-        if (getRectLeft() < world.getLeft())
+        if (getRectLeft() <= world.getLeft())
         {
             setRectLeft(world.getLeft());
             reverse();
         }
-        else if (getRectRight() > world.getRight())
+        else if (getRectRight() >= world.getRight())
         {
             setRectRight(world.getRight());
             reverse();

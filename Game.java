@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import java.awt.Dimension;
 
 public class Game extends JPanel
 {
@@ -36,6 +37,9 @@ public class Game extends JPanel
         frame.setSize(16 * 64, 9 * 64);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        // resize panel
+        this.setPreferredSize(new Dimension(16 * 64, 9 * 64));
         
         // make world
         world = new World();
