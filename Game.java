@@ -8,6 +8,8 @@
  */
 
 import java.awt.image.BufferedImage;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -100,5 +102,12 @@ public class Game extends JPanel
     {
         super.paint(g); // doesn't seem to do much other than clear the JPanel
         world.paint(g);
+        
+        String scoreText = Integer.toString(player.getScore());
+        
+        g.setColor(Color.BLACK);
+        Font font = new Font("Serif", Font.PLAIN, 48);
+        g.setFont(font);
+        g.drawString(scoreText, 48, 80);
     }
 }

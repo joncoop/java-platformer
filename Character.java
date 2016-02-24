@@ -106,7 +106,7 @@ public class Character extends Sprite
         
         for (Sprite hit : hitList)
         {
-            player.addPoints(((Coin)hit).getValue());
+            player.addPoints(((Coin)(hit)).getValue());
             coinList.remove(hit);
         }
         

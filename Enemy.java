@@ -57,7 +57,6 @@ public class Enemy extends Sprite
         move(0, 1);
         rev = true;
         hitList = getCollisionList(blockList);
-        move(0, -1);
         
         for (Sprite hit : hitList)
         {
@@ -72,7 +71,7 @@ public class Enemy extends Sprite
             {
                 if (this.getRectRight() <= hit.getRectRight())
                     rev = false;
-                }
+            }
         }
     
         if (rev)
