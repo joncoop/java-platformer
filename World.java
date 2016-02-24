@@ -69,9 +69,9 @@ public class World
         coinList.add(new Coin(10 * 64, 5 * 64, coinImg));       
 
         // make some enemies
-        BufferedImage enemyImg = ImageIO.read(new File("img/slime.png")); 
-        enemyList.add(new Enemy(3 * 64, 7 * 64, enemyImg, this));      
-        enemyList.add(new Enemy(11 * 64, 2 * 64, enemyImg, this));      
+        BufferedImage slimeImg = ImageIO.read(new File("img/slime.png")); 
+        enemyList.add(new Slime(3 * 64, 7 * 64, slimeImg, this));      
+        enemyList.add(new Slime(11 * 64, 2 * 64, slimeImg, this));      
     }
     
     public void addPlayer(Character player)
