@@ -22,11 +22,6 @@ public class Monster extends Enemy
         vx = -2;
         vy = 0;
     }
-
-    public void reverse()
-    {
-        vx *= -1;
-    }
     
     public void moveAndProcessBlocks()
     {
@@ -68,26 +63,6 @@ public class Monster extends Enemy
         }
     } 
 
-
-    
-    public void checkWorldBoundaries()
-    {                
-        if (getRectLeft() <= getWorld().getLeft())
-        {
-            setRectLeft(getWorld().getLeft());
-            reverse();
-        }
-        else if (getRectRight() >= getWorld().getRight())
-        {
-            setRectRight(getWorld().getRight());
-            reverse();
-        }
-            
-        if (getRectTop() < getWorld().getTop())
-            setRectTop(getWorld().getTop());
-        else if (getRectBottom() > getWorld().getBottom())
-            setRectBottom(getWorld().getBottom());
-    }
     public void update()
     {
         moveAndProcessBlocks();

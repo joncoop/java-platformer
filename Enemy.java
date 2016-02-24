@@ -28,4 +28,29 @@ public abstract class Enemy extends Sprite
     {
         return world;
     }
+    
+    // common enemy behaviors
+    public void reverse()
+    {
+        vx *= -1;
+    }
+    
+    public void checkWorldBoundaries()
+    {                
+        if (getRectLeft() <= getWorld().getLeft())
+        {
+            setRectLeft(getWorld().getLeft());
+            reverse();
+        }
+        else if (getRectRight() >= getWorld().getRight())
+        {
+            setRectRight(getWorld().getRight());
+            reverse();
+        }
+            
+        if (getRectTop() < getWorld().getTop())
+            setRectTop(getWorld().getTop());
+        else if (getRectBottom() > getWorld().getBottom())
+            setRectBottom(getWorld().getBottom());
+    }
 }

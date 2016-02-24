@@ -23,11 +23,6 @@ public class Slime extends Enemy
         vy = 0;
     }
 
-    public void reverse()
-    {
-        vx *= -1;
-    }
-    
     public void moveAndProcessBlocks()
     {
         List<Sprite> blockList = getWorld().getAllBlocks();
@@ -76,27 +71,7 @@ public class Slime extends Enemy
         if (rev)
             reverse(); 
     } 
-
-
     
-    public void checkWorldBoundaries()
-    {                
-        if (getRectLeft() <= getWorld().getLeft())
-        {
-            setRectLeft(getWorld().getLeft());
-            reverse();
-        }
-        else if (getRectRight() >= getWorld().getRight())
-        {
-            setRectRight(getWorld().getRight());
-            reverse();
-        }
-            
-        if (getRectTop() < getWorld().getTop())
-            setRectTop(getWorld().getTop());
-        else if (getRectBottom() > getWorld().getBottom())
-            setRectBottom(getWorld().getBottom());
-    }
     public void update()
     {
         moveAndProcessBlocks();
