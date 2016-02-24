@@ -72,6 +72,9 @@ public class World
         BufferedImage slimeImg = ImageIO.read(new File("img/slime.png")); 
         enemyList.add(new Slime(3 * 64, 7 * 64, slimeImg, this));      
         enemyList.add(new Slime(11 * 64, 2 * 64, slimeImg, this));      
+
+        BufferedImage monsterImg = ImageIO.read(new File("img/monster.png")); 
+        enemyList.add(new Monster(13 * 64, 2 * 64, monsterImg, this));      
     }
     
     public void addPlayer(Character player)
