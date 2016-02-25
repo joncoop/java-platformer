@@ -8,9 +8,9 @@
 
 import java.awt.image.BufferedImage;
 
-public class ExtraLife extends PowerUp
+public class OneUp extends PowerUp
 {
-    public ExtraLife(int x, int y, BufferedImage img, World world)
+    public OneUp(int x, int y, BufferedImage img, World world)
     {
         super(x, y, img, world);
     }

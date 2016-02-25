@@ -37,6 +37,13 @@ public class World
     private List<Sprite> enemyList = new ArrayList<Sprite>();
     private List<Sprite> powerUpList = new ArrayList<Sprite>();
     
+    // images
+    private BufferedImage blockImg = ImageIO.read(new File("img/block.png"));
+    private BufferedImage coinImg = ImageIO.read(new File("img/coin.png"));
+    private BufferedImage slimeImg = ImageIO.read(new File("img/slime.png"));
+    private BufferedImage monsterImg = ImageIO.read(new File("img/monster.png"));
+    private BufferedImage oneUpImg = ImageIO.read(new File("img/potion.png"));
+    
     public World() throws IOException
     {
         /*
@@ -50,11 +57,10 @@ public class World
         this.right = 16 * 64;
         
         // set player start
-        playerStartX = 7 * 64;
-        playerStartY = 7 * 64;
+        this.playerStartX = 7 * 64;
+        this.playerStartY = 7 * 64;
         
         // make blocks
-        BufferedImage blockImg = ImageIO.read(new File("img/block.png"));
         int x = 0;
         int y = 550;
         while (x < right)
@@ -71,7 +77,6 @@ public class World
         blockList.add(new Block(13 * 64, 3 * 64, blockImg, this));
         
         // make some coins
-        BufferedImage coinImg = ImageIO.read(new File("img/coin.png"));
         coinList.add(new Coin(3 * 64, 2 * 64, coinImg, this));
         coinList.add(new Coin(5 * 64, 4 * 64, coinImg, this));
         coinList.add(new Coin(10 * 64, 5 * 64, coinImg, this));       
@@ -80,14 +85,22 @@ public class World
         BufferedImage slimeImg = ImageIO.read(new File("img/slime.png")); 
         enemyList.add(new Slime(3 * 64, 7 * 64, slimeImg, this));      
         enemyList.add(new Slime(11 * 64, 2 * 64, slimeImg, this));      
-
-        BufferedImage monsterImg = ImageIO.read(new File("img/monster.png")); 
         enemyList.add(new Monster(13 * 64, 2 * 64, monsterImg, this));      
 
-        // add a powerup
-        BufferedImage powerUpImg = ImageIO.read(new File("img/potion.png")); 
-        powerUpList.add(new ExtraLife(14 * 64, 7 * 64, powerUpImg, this));      
+        // add a powerup 
+        powerUpList.add(new OneUp(14 * 64, 7 * 64, oneUpImg, this));      
         
+    }
+    
+    public void reset()
+    {
+        // enemy starts should probably be stored somewhere when level loads
+        enemyList.clear();
+        enemyList.add(new Slime(3 * 64, 7 * 64, slimeImg, this));      
+        enemyList.add(new Slime(11 * 64, 2 * 64, slimeImg, this));      
+        enemyList.add(new Monster(13 * 64, 2 * 64, monsterImg, this));
+        
+        player.moveTo(playerStartX, playerStartY);
     }
     
     public void addPlayer(Character player)

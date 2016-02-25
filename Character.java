@@ -24,14 +24,6 @@ public class Character extends Entity
         this.world = world;
         this.player = player;
     }
-
-    public void reset()
-    {
-        int x = world.getPlayerStartX();
-        int y = world.getPlayerStartY();
-        
-        moveTo(x, y);
-    }
     
     public Player getPlayer()
     {
@@ -73,7 +65,7 @@ public class Character extends Entity
     {
         Player p = getPlayer();
         p.setLives(p.getLives() - 1);
-        reset();
+        getWorld().reset();
     }
     
     public void moveAndProcessBlocks()
