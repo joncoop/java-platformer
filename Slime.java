@@ -12,17 +12,14 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class Slime extends Enemy
-{   
-    int vx, vy;
-    
+{       
     public Slime(int x, int y, BufferedImage img, World world)
     {
         super(x, y, img, world);
         
-        vx = -2;
-        vy = 0;
+        setVx(-2);
     }
-
+    
     public void moveAndProcessBlocks()
     {
         List<Sprite> blockList = getWorld().getAllBlocks();
@@ -30,15 +27,15 @@ public class Slime extends Enemy
         boolean rev;
         
         // apply horizontal movement
-        move(vx, 0);
+        move(getVx(), 0);
         rev = false;
         hitList = getCollisionList(blockList);
         
         for (Sprite hit : hitList)
         {
-            if (vx > 0)
+            if (getVx() > 0)
                 setRectRight(hit.getRectLeft());
-            else if (vx < 0)
+            else if (getVx() < 0)
                 setRectLeft(hit.getRectRight());
                 
             rev = true;
@@ -56,12 +53,12 @@ public class Slime extends Enemy
         {
             setRectBottom(hit.getRectTop());
             
-            if (vx < 0)
+            if (getVx() < 0)
             {
                 if (this.getRectLeft() >= hit.getRectLeft())
                     rev = false;
             }
-            else if (vx > 0)
+            else if (getVx() > 0)
             {
                 if (this.getRectRight() <= hit.getRectRight())
                     rev = false;

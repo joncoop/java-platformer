@@ -11,7 +11,7 @@ import java.awt.image.BufferedImage;
 import java.util.List;
 import java.util.ArrayList;
 
-public class Character extends Sprite
+public class Character extends Entity
 {
     private World world;
     private Player player;

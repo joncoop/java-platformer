@@ -13,14 +13,11 @@ import java.util.ArrayList;
 
 public class Monster extends Enemy
 {   
-    int vx, vy;
-    
     public Monster(int x, int y, BufferedImage img, World world)
     {
         super(x, y, img, world);
         
-        vx = -2;
-        vy = 0;
+        setVx(-2);
     }
     
     public void moveAndProcessBlocks()
@@ -30,15 +27,15 @@ public class Monster extends Enemy
         boolean rev;
         
         // apply horizontal movement
-        move(vx, 0);
+        move(getVx(), 0);
         rev = false;
         hitList = getCollisionList(blockList);
         
         for (Sprite hit : hitList)
         {
-            if (vx > 0)
+            if (getVx() > 0)
                 setRectRight(hit.getRectLeft());
-            else if (vx < 0)
+            else if (getVx() < 0)
                 setRectLeft(hit.getRectRight());
                 
             rev = true;
@@ -48,18 +45,18 @@ public class Monster extends Enemy
             reverse();
         
         // apply gravity and vertical movement
-        vy += getWorld().getGravity();
-        move(0, vy);
+        setVy(getVy() + (int)getWorld().getGravity());
+        move(0, getVy());
         
         hitList = getCollisionList(blockList);
         
         for (Sprite hit : hitList)
         {
-            if (vy > 0)
+            if (getVy() > 0)
                 setRectBottom(hit.getRectTop());
-            else if (vy < 0)
+            else if (getVy() < 0)
                 setRectTop(hit.getRectBottom());
-            vy = 0;
+            setVy(0);
         }
     } 
 

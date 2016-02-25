@@ -11,17 +11,14 @@ import java.awt.image.BufferedImage;
 import java.util.List;
 import java.util.ArrayList;
 
-public abstract class Enemy extends Sprite
+public abstract class Enemy extends Entity
 {
     private World world;
-    private int vx, vy;
-    
+
     public Enemy(int x, int y, BufferedImage img, World world)
     {
         super(x, y, img);
         this.world = world;
-        
-        vx = -2;
     }
 
     public World getWorld()
@@ -30,11 +27,6 @@ public abstract class Enemy extends Sprite
     }
     
     // common enemy behaviors
-    public void reverse()
-    {
-        vx *= -1;
-    }
-    
     public void checkWorldBoundaries()
     {                
         if (getRectLeft() <= getWorld().getLeft())

@@ -9,7 +9,7 @@
 
 import java.awt.image.BufferedImage;
 
-public class Block extends Sprite
+public class Block extends Entity
 {
     public Block(int x, int y, BufferedImage img)
     {

@@ -9,7 +9,7 @@
 
 import java.awt.image.BufferedImage;
 
-public class Coin extends Sprite
+public class Coin extends Entity
 {
     private int value = 1;
     
