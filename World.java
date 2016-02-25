@@ -51,22 +51,22 @@ public class World
         int y = 550;
         while (x < right)
         {
-            blockList.add(new Block(x, 8 * 64, blockImg));
+            blockList.add(new Block(x, 8 * 64, blockImg, this));
             x += 64;
         }
-        blockList.add(new Block(3 * 64, 6 * 64, blockImg));
-        blockList.add(new Block(10 * 64, 7 * 64, blockImg));
+        blockList.add(new Block(3 * 64, 6 * 64, blockImg, this));
+        blockList.add(new Block(10 * 64, 7 * 64, blockImg, this));
 
-        blockList.add(new Block(10 * 64, 3 * 64, blockImg));
-        blockList.add(new Block(11 * 64, 3 * 64, blockImg));
-        blockList.add(new Block(12 * 64, 3 * 64, blockImg));
-        blockList.add(new Block(13 * 64, 3 * 64, blockImg));
+        blockList.add(new Block(10 * 64, 3 * 64, blockImg, this));
+        blockList.add(new Block(11 * 64, 3 * 64, blockImg, this));
+        blockList.add(new Block(12 * 64, 3 * 64, blockImg, this));
+        blockList.add(new Block(13 * 64, 3 * 64, blockImg, this));
         
         // make some coins
         BufferedImage coinImg = ImageIO.read(new File("img/coin.png"));
-        coinList.add(new Coin(3 * 64, 2 * 64, coinImg));
-        coinList.add(new Coin(5 * 64, 4 * 64, coinImg));
-        coinList.add(new Coin(10 * 64, 5 * 64, coinImg));       
+        coinList.add(new Coin(3 * 64, 2 * 64, coinImg, this));
+        coinList.add(new Coin(5 * 64, 4 * 64, coinImg, this));
+        coinList.add(new Coin(10 * 64, 5 * 64, coinImg, this));       
 
         // make some enemies
         BufferedImage slimeImg = ImageIO.read(new File("img/slime.png")); 

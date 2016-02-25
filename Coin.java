@@ -13,9 +13,9 @@ public class Coin extends Entity
 {
     private int value = 1;
     
-    public Coin(int x, int y, BufferedImage img)
+    public Coin(int x, int y, BufferedImage img, World world)
     {
-        super(x, y, img);
+        super(x, y, img, world);
     }
     
     public int getValue()

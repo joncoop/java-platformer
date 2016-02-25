@@ -15,28 +15,24 @@ public class Character extends Entity
 {
     private World world;
     private Player player;
-    private int vx, vy;
     private int runSpeed = 5;
     private int jumpPower = 20;
     
     public Character(int x, int y, BufferedImage img, World world, Player player)
     {
-        super(x, y, img);
+        super(x, y, img, world);
         this.world = world;
         this.player = player;
-        
-        vx = 0;
-        vy = 0;
     }
 
     public void moveRight()
     {
-        vx = runSpeed;
+        setVx(runSpeed);
     }
 
     public void moveLeft()
     {
-        vx = -runSpeed;
+        setVx(-runSpeed);
     }
     
     public void jump()
@@ -49,7 +45,7 @@ public class Character extends Entity
         
         // jump if intersects with block
         if (hitList.size() > 0)
-            vy = -jumpPower;
+            setVy(-jumpPower);
             
         // nudge back up to original position
         move(0, -1);
@@ -57,7 +53,7 @@ public class Character extends Entity
     
     public void stop()
     {
-        vx = 0;
+        setVx(0);
     }
     
     public void moveAndProcessBlocks()
@@ -66,31 +62,31 @@ public class Character extends Entity
         List<Sprite> hitList;
         
         // apply horizontal movement
-        move(vx, 0);
+        move(getVx(), 0);
        
         hitList = getCollisionList(blockList);
         
         for (Sprite hit : hitList)
         {
-            if (vx > 0)
+            if (getVx() > 0)
                 setRectRight(hit.getRectLeft());
-            else if (vx < 0)
+            else if (getVx() < 0)
                 setRectLeft(hit.getRectRight());
         }
         
         // apply gravity and vertical movement
-        vy += world.getGravity();
-        move(0, vy);
+        applyGravity();
+        move(0, getVy());
         
         hitList = getCollisionList(blockList);
         
         for (Sprite hit : hitList)
         {
-            if (vy > 0)
+            if (getVy() > 0)
                 setRectBottom(hit.getRectTop());
-            else if (vy < 0)
+            else if (getVy() < 0)
                 setRectTop(hit.getRectBottom());
-            vy = 0;
+            setVy(0);
         }
     }
     

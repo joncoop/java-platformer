@@ -45,7 +45,7 @@ public class Monster extends Enemy
             reverse();
         
         // apply gravity and vertical movement
-        setVy(getVy() + (int)getWorld().getGravity());
+        applyGravity();;
         move(0, getVy());
         
         hitList = getCollisionList(blockList);

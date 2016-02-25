@@ -11,9 +11,9 @@ import java.awt.image.BufferedImage;
 
 public class Block extends Entity
 {
-    public Block(int x, int y, BufferedImage img)
+    public Block(int x, int y, BufferedImage img, World world)
     {
-        super(x, y, img);
+        super(x, y, img, world);
     }
     
     public void update()

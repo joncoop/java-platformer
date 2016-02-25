@@ -13,19 +13,12 @@ import java.util.ArrayList;
 
 public abstract class Enemy extends Entity
 {
-    private World world;
-
     public Enemy(int x, int y, BufferedImage img, World world)
     {
-        super(x, y, img);
-        this.world = world;
+        super(x, y, img, world);
+
     }
 
-    public World getWorld()
-    {
-        return world;
-    }
-    
     // common enemy behaviors
     public void checkWorldBoundaries()
     {                

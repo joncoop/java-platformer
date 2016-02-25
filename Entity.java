@@ -11,13 +11,21 @@ import java.awt.image.BufferedImage;
 public abstract class Entity extends Sprite
 {
     private int vx, vy;
+    private World world;
     
-    public Entity(int x, int y, BufferedImage img)
+    public Entity(int x, int y, BufferedImage img, World world)
     {
         super(x, y, img);
         
+        this.world = world;
         vx = 0;
         vy = 0;
+    }
+    
+    
+    public World getWorld()
+    {
+        return world;
     }
     
     public int getVx()
@@ -38,6 +46,11 @@ public abstract class Entity extends Sprite
     public void setVy(int vy)
     {
         this.vy = vy;
+    }
+    
+    public void applyGravity()
+    {
+        vy += world.getGravity();
     }
     
     public void reverse()
