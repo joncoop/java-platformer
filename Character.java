@@ -25,6 +25,14 @@ public class Character extends Entity
         this.player = player;
     }
 
+    public void reset()
+    {
+        int x = world.getPlayerStartX();
+        int y = world.getPlayerStartY();
+        
+        moveTo(x, y);
+    }
+    
     public Player getPlayer()
     {
         return player;
@@ -59,6 +67,13 @@ public class Character extends Entity
     public void stop()
     {
         setVx(0);
+    }
+    
+    public void die()
+    {
+        Player p = getPlayer();
+        p.setLives(p.getLives() - 1);
+        reset();
     }
     
     public void moveAndProcessBlocks()
@@ -97,7 +112,11 @@ public class Character extends Entity
     
     public void processEnemies()
     {
+        List<Sprite> enemyList = world.getAllEnemies();
+        List<Sprite> hitList = getCollisionList(enemyList);
         
+        if (hitList.size() > 0)
+            die();     
     }
     
     public void processCoins()
@@ -109,8 +128,7 @@ public class Character extends Entity
         {
             player.addPoints(((Coin)(hit)).getValue());
             coinList.remove(hit);
-        }
-        
+        }  
     }
     
     public void processPowerUps()

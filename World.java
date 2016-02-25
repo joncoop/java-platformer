@@ -24,6 +24,9 @@ public class World
     private int right;
     private int left;
     
+    // player start
+    private int playerStartX, playerStartY;
+    
     // world physics
     private double gravity = 1.0;
     
@@ -45,6 +48,10 @@ public class World
         this.bottom = 9 * 64;
         this.left = 0;
         this.right = 16 * 64;
+        
+        // set player start
+        playerStartX = 7 * 64;
+        playerStartY = 7 * 64;
         
         // make blocks
         BufferedImage blockImg = ImageIO.read(new File("img/block.png"));
@@ -108,6 +115,16 @@ public class World
         return left;
     }
     
+    public int getPlayerStartX()
+    {
+        return playerStartX;
+    }
+    
+    public int getPlayerStartY()
+    {
+        return playerStartY;
+    }
+    
     public double getGravity()
     {
         return gravity;
@@ -127,7 +144,12 @@ public class World
     {   
         return powerUpList;
     }
-    
+
+    public List<Sprite> getAllEnemies()
+    {   
+        return enemyList;
+    }
+
     public void paint(Graphics g)
     {
         g.setColor(new Color(125, 200, 255)); // sky blue

@@ -14,7 +14,7 @@ public class Player
     
     public Player()
     {
-        this.lives = 0;
+        this.lives = 3;
         this.score = 0;
     }
     
