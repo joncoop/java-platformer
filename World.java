@@ -25,13 +25,13 @@ public class World
     private int left;
     
     // player start
-    private int playerStartX, playerStartY;
+    private int characterStartX, characterStartY;
     
     // world physics
     private double gravity = 1.0;
     
     // world objects
-    private Sprite player;
+    private Sprite character;
     private List<Sprite> blockList = new ArrayList<Sprite>();
     private List<Sprite> coinList = new ArrayList<Sprite>();
     private List<Sprite> enemyList = new ArrayList<Sprite>();
@@ -57,8 +57,8 @@ public class World
         this.right = 16 * 64;
         
         // set player start
-        this.playerStartX = 7 * 64;
-        this.playerStartY = 7 * 64;
+        this.characterStartX = 7 * 64;
+        this.characterStartY = 7 * 64;
         
         // make blocks
         int x = 0;
@@ -100,12 +100,12 @@ public class World
         enemyList.add(new Slime(11 * 64, 2 * 64, slimeImg, this));      
         enemyList.add(new Monster(13 * 64, 2 * 64, monsterImg, this));
         
-        player.moveTo(playerStartX, playerStartY);
+        character.moveTo(characterStartX, characterStartY);
     }
     
-    public void addPlayer(Character player)
+    public void addPlayer(Character character)
     {
-        this.player = player;
+        this.character = character;
     }
 
     public int getTop()
@@ -130,12 +130,12 @@ public class World
     
     public int getPlayerStartX()
     {
-        return playerStartX;
+        return characterStartX;
     }
     
     public int getPlayerStartY()
     {
-        return playerStartY;
+        return characterStartY;
     }
     
     public double getGravity()
@@ -180,12 +180,12 @@ public class World
         for (Sprite powerUp : powerUpList)
             powerUp.paint(g);
             
-        player.paint(g);
+        character.paint(g);
     }
     
     public void update()
     {
-        player.update();
+        character.update();
         
         for (Sprite enemy : enemyList)
             enemy.update();        
