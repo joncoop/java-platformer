@@ -104,10 +104,16 @@ public class Game extends JPanel
         world.paint(g);
         
         String scoreText = Integer.toString(player.getScore());
+        String livesText = Integer.toString(player.getLives());
         
         g.setColor(Color.BLACK);
         Font font = new Font("Serif", Font.PLAIN, 48);
         g.setFont(font);
         g.drawString(scoreText, 48, 80);
+        
+        g.setColor(Color.RED);
+
+        g.setFont(font);
+        g.drawString(livesText, 48, 130);
     }
 }

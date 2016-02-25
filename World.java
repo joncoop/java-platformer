@@ -32,6 +32,7 @@ public class World
     private List<Sprite> blockList = new ArrayList<Sprite>();
     private List<Sprite> coinList = new ArrayList<Sprite>();
     private List<Sprite> enemyList = new ArrayList<Sprite>();
+    private List<Sprite> powerUpList = new ArrayList<Sprite>();
     
     public World() throws IOException
     {
@@ -75,6 +76,11 @@ public class World
 
         BufferedImage monsterImg = ImageIO.read(new File("img/monster.png")); 
         enemyList.add(new Monster(13 * 64, 2 * 64, monsterImg, this));      
+
+        // add a powerup
+        BufferedImage powerUpImg = ImageIO.read(new File("img/potion.png")); 
+        powerUpList.add(new ExtraLife(14 * 64, 7 * 64, powerUpImg, this));      
+        
     }
     
     public void addPlayer(Character player)
@@ -117,6 +123,11 @@ public class World
         return coinList;
     }
     
+    public List<Sprite> getAllPowerUps()
+    {   
+        return powerUpList;
+    }
+    
     public void paint(Graphics g)
     {
         g.setColor(new Color(125, 200, 255)); // sky blue
@@ -130,6 +141,9 @@ public class World
             
         for (Sprite enemy : enemyList)
             enemy.paint(g);
+            
+        for (Sprite powerUp : powerUpList)
+            powerUp.paint(g);
             
         player.paint(g);
     }

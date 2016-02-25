@@ -25,6 +25,11 @@ public class Character extends Entity
         this.player = player;
     }
 
+    public Player getPlayer()
+    {
+        return player;
+    }
+    
     public void moveRight()
     {
         setVx(runSpeed);
@@ -108,6 +113,20 @@ public class Character extends Entity
         
     }
     
+    public void processPowerUps()
+    {
+        List<Sprite> powerUpList = world.getAllPowerUps();
+        List<Sprite> hitList = getCollisionList(powerUpList);
+        
+        for (Sprite hit : hitList)
+        {
+            PowerUp p = (PowerUp)hit;
+            p.apply(this);
+            powerUpList.remove(hit);
+        }
+        
+    }
+    
     public void checkWorldBoundaries()
     {          
         if (getRectLeft() < world.getLeft())
@@ -126,6 +145,7 @@ public class Character extends Entity
         moveAndProcessBlocks();
         processEnemies();
         processCoins();
+        processPowerUps();
         checkWorldBoundaries();
     }
 }
