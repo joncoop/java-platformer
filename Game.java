@@ -104,6 +104,7 @@ public class Game extends JPanel
 
     public void restart()
     {
+        // Warning: this method doesn't reset coins & powerups yet!
         player.setScore(0);
         player.setLives(0);
         world.reset();
