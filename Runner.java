@@ -13,7 +13,7 @@ public class Runner
 {
     public static void main(String[] args) throws IOException, InterruptedException
     {
-        Game g = new Game("Game Title");
+        Game g = new Game();
         g.play();
     }
 }

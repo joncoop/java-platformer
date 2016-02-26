@@ -7,41 +7,52 @@
  *      <https://github.com/joncoop/java-platformer>.
  */
 
-import java.awt.image.BufferedImage;
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
-import java.awt.Dimension;
 
 public class Game extends JPanel
 {
+    // window settings
+    public static final int WIDTH = 16;
+    public static final int HEIGHT = 9;
+    public static final int SCALE = 64;
+    public static final String TITLE = "Game Title";
+    
+    // stages
     public static final int START = 0;
     public static final int PLAYING = 1;
     public static final int PAUSED = 2;
     public static final int END = 3;
-    
+       
     private JFrame frame;
     private Player player;
     private Character character;
     private World world;
     private int state;
     
-    public Game(String title) throws IOException
+    public Game() throws IOException
     {
-        // make Jframe
-        frame = new JFrame(title);
-        frame.add(this);
-        frame.setSize(16 * 64, 9 * 64);
-        frame.setVisible(true);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setMinimumSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
+        setMaximumSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
+        setPreferredSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
         
-        // resize panel
-        this.setPreferredSize(new Dimension(16 * 64, 9 * 64));
+        // make Jframe
+        frame = new JFrame(TITLE);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(new BorderLayout());
+        frame.add(this, BorderLayout.CENTER);
+        frame.pack();
+        frame.setResizable(false);
+        frame.setVisible(true);
         
         // make world
         world = new World();
@@ -85,7 +96,7 @@ public class Game extends JPanel
         else if (state == PAUSED);
             state = PLAYING;
     }
-    
+
     public void play() throws InterruptedException
     {
         while (true)
@@ -96,13 +107,15 @@ public class Game extends JPanel
             }
             
             repaint();
+            
             Thread.sleep(10);
         }
     }
     
-    public void paint(Graphics g) 
+    public void paintComponent(Graphics g)
     {
-        super.paint(g); // doesn't seem to do much other than clear the JPanel
+        super.paintComponent(g);
+        
         world.paint(g);
         
         String scoreText = Integer.toString(player.getScore());
