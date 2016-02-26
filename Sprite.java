@@ -97,7 +97,7 @@ public abstract class Sprite
     
     public void paint(Graphics g)
     {
-        g.drawImage(img, x, y, img.getWidth(), img.getHeight(), null);   
+        g.drawImage(img, x, y, img.getWidth(), img.getHeight(), null);
     }
     
     public abstract void update();

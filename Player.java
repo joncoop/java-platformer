@@ -47,5 +47,4 @@ public class Player
         if (lives == 0)
             game.setState(Game.OVER);
     }
-
 }

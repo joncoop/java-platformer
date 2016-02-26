@@ -22,6 +22,6 @@ public class OneUp extends PowerUp
     
     public void update()
     {
-        
+        // do nothing
     }
 }

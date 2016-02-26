@@ -136,7 +136,6 @@ public class Character extends Entity
             p.apply(this);
             powerUpList.remove(hit);
         }
-        
     }
     
     public void checkWorldBoundaries()

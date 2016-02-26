@@ -25,6 +25,6 @@ public class Coin extends Entity
     
     public void update()
     {
-        
+        // do nothing
     }
 }

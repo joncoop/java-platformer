@@ -20,5 +20,4 @@ public class Block extends Entity
     {
         // blocks don't do anything
     }
-    
 }

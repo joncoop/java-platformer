@@ -34,15 +34,15 @@ public class GameControls implements KeyListener
             // any key starts
             game.setState(Game.PLAYING);
         }
-        else if (state == Game.OVER)
-        {
-            if (code == KeyEvent.VK_N)
-                game.restart();
-        }
         else if (state == Game.PLAYING || state == Game.PAUSED)
         {
             if (code == KeyEvent.VK_P)
                 game.togglePause();
+        }
+        else if (state == Game.OVER)
+        {
+            if (code == KeyEvent.VK_N)
+                game.restart();
         }
     }
     

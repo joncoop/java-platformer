@@ -167,7 +167,6 @@ public class Game extends JPanel
             g.drawString(overText, 240, 250);
             g.setFont(small);
             g.drawString(newText, 285, 300);
-        }
-        
+        }     
     }
 }
