@@ -65,7 +65,9 @@ public class Character extends Entity
     {
         Player p = getPlayer();
         p.setLives(p.getLives() - 1);
-        getWorld().reset();
+        
+        if (p.getLives() > 0)
+            getWorld().reset();
     }
     
     public void moveAndProcessBlocks()

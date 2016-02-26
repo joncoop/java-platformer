@@ -31,7 +31,7 @@ public class Game extends JPanel
     public static final int START = 0;
     public static final int PLAYING = 1;
     public static final int PAUSED = 2;
-    public static final int END = 3;
+    public static final int OVER = 3;
        
     private JFrame frame;
     private Player player;
@@ -58,7 +58,7 @@ public class Game extends JPanel
         world = new World();
         
         // make player
-        player = new Player();
+        player = new Player(this);
         
         // make character
         BufferedImage characterImg = ImageIO.read(new File("img/baby_tux.png"));

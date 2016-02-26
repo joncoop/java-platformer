@@ -9,11 +9,13 @@
 
 public class Player
 {
+    Game game;
     private int lives;
     private int score;
     
-    public Player()
+    public Player(Game game)
     {
+        this.game = game;
         this.lives = 3;
         this.score = 0;
     }
@@ -36,6 +38,9 @@ public class Player
     public void setLives(int lives)
     {
         this.lives = lives;
+        
+        if (lives == 0)
+            game.setState(Game.OVER);
     }
 
 }
