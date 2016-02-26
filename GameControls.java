@@ -28,8 +28,8 @@ public class GameControls implements KeyListener
     {
         int code = e.getKeyCode();
         
-        if (game.getState() == game.START)
-            game.setState(game.PLAYING);
+        if (game.getState() == Game.START)
+            game.setState(Game.PLAYING);
         else if (code == KeyEvent.VK_P)
             game.togglePause();
     }

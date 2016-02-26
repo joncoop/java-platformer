@@ -23,7 +23,7 @@ public class CharacterControls implements KeyListener
     
     public void keyPressed(KeyEvent e) 
     {
-        if (game.getState() == game.PLAYING)
+        if (game.getState() == Game.PLAYING)
         {
             int code = e.getKeyCode();
             

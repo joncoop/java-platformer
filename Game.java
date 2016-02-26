@@ -93,7 +93,7 @@ public class Game extends JPanel
     {
         if (state == PLAYING)
             state = PAUSED;
-        else if (state == PAUSED);
+        else if (state == PAUSED)
             state = PLAYING;
     }
 
