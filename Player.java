@@ -35,6 +35,11 @@ public class Player
         return lives;
     }
     
+    public void setScore(int score)
+    {
+        this.score = score;
+    }
+    
     public void setLives(int lives)
     {
         this.lives = lives;

@@ -27,11 +27,23 @@ public class GameControls implements KeyListener
     public void keyReleased(KeyEvent e) 
     {
         int code = e.getKeyCode();
+        int state = game.getState();
         
-        if (game.getState() == Game.START)
+        if (state == Game.START)
+        {
+            // any key starts
             game.setState(Game.PLAYING);
-        else if (code == KeyEvent.VK_P)
-            game.togglePause();
+        }
+        else if (state == Game.OVER)
+        {
+            if (code == KeyEvent.VK_N)
+                game.restart();
+        }
+        else if (state == Game.PLAYING || state == Game.PAUSED)
+        {
+            if (code == KeyEvent.VK_P)
+                game.togglePause();
+        }
     }
     
     public void keyTyped(KeyEvent e) 

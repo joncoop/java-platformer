@@ -84,6 +84,11 @@ public class Game extends JPanel
         return state;
     }
     
+    public Player getPlayer()
+    {
+        return player;
+    }
+    
     public void setState(int state)
     {
         this.state = state;
@@ -97,6 +102,14 @@ public class Game extends JPanel
             state = PLAYING;
     }
 
+    public void restart()
+    {
+        player.setScore(0);
+        player.setLives(0);
+        world.reset();
+        state = START;
+    }
+    
     public void play() throws InterruptedException
     {
         while (true)
@@ -118,17 +131,42 @@ public class Game extends JPanel
         
         world.paint(g);
         
-        String scoreText = Integer.toString(player.getScore());
-        String livesText = Integer.toString(player.getLives());
+        String scoreText = "Score: " + player.getScore();
+        String livesText = "Lives: " + player.getLives();
+        String startText = "Press any key to start.";
+        String pauseText = "Press 'p' to resume.";
+        String overText = "Game Over";
+        String newText = "Press 'n' to start a new game.";
         
-        g.setColor(Color.BLACK);
-        Font font = new Font("Serif", Font.PLAIN, 48);
-        g.setFont(font);
-        g.drawString(scoreText, 48, 80);
+        Font small = new Font("Serif", Font.PLAIN, 32);
+        Font medium = new Font("Serif", Font.PLAIN, 64);
+        Font large = new Font("Serif", Font.PLAIN, 96);
         
-        g.setColor(Color.RED);
-
-        g.setFont(font);
-        g.drawString(livesText, 48, 130);
+        g.setColor(Color.WHITE);
+        g.setFont(small);
+        g.drawString(scoreText, 32, 64);
+        g.drawString(livesText, 32, 96);
+        
+        
+        if (state == START)
+        {
+            g.setFont(large);
+            g.drawString(TITLE, 220, 250);
+            g.setFont(small);
+            g.drawString(startText, 320, 300);
+        }
+        else if (state == PAUSED)
+        {
+            g.setFont(small);
+            g.drawString(pauseText, 340, 280);
+        }
+        else if (state == OVER)
+        {
+            g.setFont(large);
+            g.drawString(overText, 240, 250);
+            g.setFont(small);
+            g.drawString(newText, 285, 300);
+        }
+        
     }
 }
