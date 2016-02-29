@@ -10,6 +10,7 @@
 import java.awt.image.BufferedImage;
 import java.util.List;
 import java.util.ArrayList;
+import java.io.IOException;
 
 public class Character extends Entity
 {
@@ -151,7 +152,7 @@ public class Character extends Entity
             setRectBottom(world.getBottom());
     }
     
-    public void update()
+    public void update() 
     {
         moveAndProcessBlocks();
         processEnemies();

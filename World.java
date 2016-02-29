@@ -45,10 +45,11 @@ public class World
     private BufferedImage monsterImg = ImageIO.read(new File("img/monster.png"));
     private BufferedImage oneUpImg = ImageIO.read(new File("img/potion.png"));
     
+    List<String> tokens = new ArrayList<String>();
+    
     public World() throws IOException
     {
         Scanner inFile1 = new Scanner(new File("data/level1.txt")).useDelimiter("\n");
-        List<String> tokens = new ArrayList<String>();
         
         while (inFile1.hasNext()) {
             tokens.add(inFile1.nextLine());
@@ -92,61 +93,15 @@ public class World
         this.right = 16 * 64;
     }
     
-    public void loadLevel() throws IOException {
-        Scanner inFile1 = new Scanner(new File("data/level1.txt")).useDelimiter("\n");
-        List<String> tokens = new ArrayList<String>();
-        
-        while (inFile1.hasNext()) {
-            tokens.add(inFile1.nextLine());
-        }
-        
-        int longest = 0;
-        
-        int row = 0;
-        for (String t : tokens) {
-            for (int col=0; col < t.length(); col++) {
-                if (t.charAt(col) == '1') {
-                    this.characterStartX = col * Game.SCALE;
-                    this.characterStartY = row * Game.SCALE;
-                }
-                else if (t.charAt(col) == 'B') {
-                    blockList.add(new Block(col * Game.SCALE, row * Game.SCALE, blockImg, this));
-                }
-                else if (t.charAt(col) == 'S') {
-                    enemyList.add(new Slime(col * Game.SCALE, row * Game.SCALE, slimeImg, this));
-                }
-                else if (t.charAt(col) == 'M') {
-                    enemyList.add(new Monster(col * Game.SCALE, row * Game.SCALE, monsterImg, this));
-                }
-                else if (t.charAt(col) == 'C') {
-                    coinList.add(new Coin(col * Game.SCALE, row * Game.SCALE, coinImg, this));
-                }
-                else if (t.charAt(col) == 'U') {
-                    powerUpList.add(new OneUp(col * Game.SCALE, row * Game.SCALE, oneUpImg, this));
-                }
-                
-                longest = Math.max(longest, t.length());
-            }
-            
-            row++;
-        }        
-        
-        // set boundaries
-        this.top = 0;
-        this.left = 0;
-        this.bottom = tokens.size() * Game.SCALE;
-        this.right = 16 * 64;
+    public void load()
+    {
+        // reads file and stores locations of Entites
     }
     
     public void reset()
     {
-        // enemy starts should probably be stored somewhere when level loads
-        enemyList.clear();
-        enemyList.add(new Slime(3 * 64, 7 * 64, slimeImg, this));      
-        enemyList.add(new Slime(11 * 64, 2 * 64, slimeImg, this));      
-        enemyList.add(new Monster(13 * 64, 2 * 64, monsterImg, this));
-        
-        character.moveTo(characterStartX, characterStartY);
+        // need to save locations when file is read so reloading isn't necessary.
+        // should save lots of ioexception handling.
     }
     
     public void addPlayer(Character character)
