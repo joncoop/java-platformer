@@ -17,6 +17,4 @@ public abstract class PowerUp extends Entity
     }
     
     public abstract void apply(Character character);
-    
-    public abstract void update();
 }

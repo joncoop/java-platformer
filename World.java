@@ -11,6 +11,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -46,50 +47,95 @@ public class World
     
     public World() throws IOException
     {
-        /*
-         * Everything in this constructor can load from a file later.
-         */
+        Scanner inFile1 = new Scanner(new File("data/level1.txt")).useDelimiter("\n");
+        List<String> tokens = new ArrayList<String>();
+        
+        while (inFile1.hasNext()) {
+            tokens.add(inFile1.nextLine());
+        }
+        
+        int longest = 0;
+        
+        int row = 0;
+        for (String t : tokens) {
+            for (int col=0; col < t.length(); col++) {
+                if (t.charAt(col) == '1') {
+                    this.characterStartX = col * Game.SCALE;
+                    this.characterStartY = row * Game.SCALE;
+                }
+                else if (t.charAt(col) == 'B') {
+                    blockList.add(new Block(col * Game.SCALE, row * Game.SCALE, blockImg, this));
+                }
+                else if (t.charAt(col) == 'S') {
+                    enemyList.add(new Slime(col * Game.SCALE, row * Game.SCALE, slimeImg, this));
+                }
+                else if (t.charAt(col) == 'M') {
+                    enemyList.add(new Monster(col * Game.SCALE, row * Game.SCALE, monsterImg, this));
+                }
+                else if (t.charAt(col) == 'C') {
+                    coinList.add(new Coin(col * Game.SCALE, row * Game.SCALE, coinImg, this));
+                }
+                else if (t.charAt(col) == 'U') {
+                    powerUpList.add(new OneUp(col * Game.SCALE, row * Game.SCALE, oneUpImg, this));
+                }
+                
+                longest = Math.max(longest, t.length());
+            }
+            
+            row++;
+        }        
         
         // set boundaries
         this.top = 0;
-        this.bottom = 9 * 64;
         this.left = 0;
+        this.bottom = tokens.size() * Game.SCALE;
         this.right = 16 * 64;
+    }
+    
+    public void loadLevel() throws IOException {
+        Scanner inFile1 = new Scanner(new File("data/level1.txt")).useDelimiter("\n");
+        List<String> tokens = new ArrayList<String>();
         
-        // set player start
-        this.characterStartX = 7 * 64;
-        this.characterStartY = 7 * 64;
-        
-        // make blocks
-        int x = 0;
-        int y = 550;
-        while (x < right)
-        {
-            blockList.add(new Block(x, 8 * 64, blockImg, this));
-            x += 64;
+        while (inFile1.hasNext()) {
+            tokens.add(inFile1.nextLine());
         }
-        blockList.add(new Block(3 * 64, 6 * 64, blockImg, this));
-        blockList.add(new Block(10 * 64, 7 * 64, blockImg, this));
-
-        blockList.add(new Block(10 * 64, 3 * 64, blockImg, this));
-        blockList.add(new Block(11 * 64, 3 * 64, blockImg, this));
-        blockList.add(new Block(12 * 64, 3 * 64, blockImg, this));
-        blockList.add(new Block(13 * 64, 3 * 64, blockImg, this));
         
-        // make some coins
-        coinList.add(new Coin(3 * 64, 2 * 64, coinImg, this));
-        coinList.add(new Coin(5 * 64, 4 * 64, coinImg, this));
-        coinList.add(new Coin(10 * 64, 5 * 64, coinImg, this));       
-
-        // make some enemies
-        BufferedImage slimeImg = ImageIO.read(new File("img/slime.png")); 
-        enemyList.add(new Slime(3 * 64, 7 * 64, slimeImg, this));      
-        enemyList.add(new Slime(11 * 64, 2 * 64, slimeImg, this));      
-        enemyList.add(new Monster(13 * 64, 2 * 64, monsterImg, this));      
-
-        // add a powerup 
-        powerUpList.add(new OneUp(14 * 64, 7 * 64, oneUpImg, this));      
+        int longest = 0;
         
+        int row = 0;
+        for (String t : tokens) {
+            for (int col=0; col < t.length(); col++) {
+                if (t.charAt(col) == '1') {
+                    this.characterStartX = col * Game.SCALE;
+                    this.characterStartY = row * Game.SCALE;
+                }
+                else if (t.charAt(col) == 'B') {
+                    blockList.add(new Block(col * Game.SCALE, row * Game.SCALE, blockImg, this));
+                }
+                else if (t.charAt(col) == 'S') {
+                    enemyList.add(new Slime(col * Game.SCALE, row * Game.SCALE, slimeImg, this));
+                }
+                else if (t.charAt(col) == 'M') {
+                    enemyList.add(new Monster(col * Game.SCALE, row * Game.SCALE, monsterImg, this));
+                }
+                else if (t.charAt(col) == 'C') {
+                    coinList.add(new Coin(col * Game.SCALE, row * Game.SCALE, coinImg, this));
+                }
+                else if (t.charAt(col) == 'U') {
+                    powerUpList.add(new OneUp(col * Game.SCALE, row * Game.SCALE, oneUpImg, this));
+                }
+                
+                longest = Math.max(longest, t.length());
+            }
+            
+            row++;
+        }        
+        
+        // set boundaries
+        this.top = 0;
+        this.left = 0;
+        this.bottom = tokens.size() * Game.SCALE;
+        this.right = 16 * 64;
     }
     
     public void reset()
