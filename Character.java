@@ -152,8 +152,8 @@ public class Character extends Entity
             
         if (getRectTop() < world.getTop())
             setRectTop(world.getTop());
-        else if (getRectBottom() > world.getBottom())
-            setRectBottom(world.getBottom());
+        else if (getRectTop() > world.getBottom() + 2 * Game.SCALE)
+            die();
     }
     
     public void update() 
