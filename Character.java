@@ -76,30 +76,34 @@ public class Character extends Entity
         List<Sprite> blockList = world.getAllBlocks();
         List<Sprite> hitList;
         
+
+        int xVel = getVx();
+        int yVel = getVy();
+        
         // apply horizontal movement
-        move(getVx(), 0);
-       
+        move(xVel, 0);
+
         hitList = getCollisionList(blockList);
         
         for (Sprite hit : hitList)
         {
-            if (getVx() > 0)
+            if (xVel > 0)
                 setRectRight(hit.getRectLeft());
-            else if (getVx() < 0)
+            else if (xVel < 0)
                 setRectLeft(hit.getRectRight());
         }
         
         // apply gravity and vertical movement
         applyGravity();
-        move(0, getVy());
+        move(0, yVel);
         
         hitList = getCollisionList(blockList);
         
         for (Sprite hit : hitList)
         {
-            if (getVy() > 0)
+            if (yVel > 0)
                 setRectBottom(hit.getRectTop());
-            else if (getVy() < 0)
+            else if (yVel < 0)
                 setRectTop(hit.getRectBottom());
             setVy(0);
         }

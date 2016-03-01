@@ -100,7 +100,7 @@ public class World
         this.top = 0;
         this.left = 0;
         this.bottom = tokens.size() * Game.SCALE;
-        this.right = 16 * 64;
+        this.right = longest * 64;
         
         // initial state has all entities
         blockList = new ArrayList<Sprite>(startBlockList);
@@ -188,6 +188,17 @@ public class World
 
     public void paint(Graphics g)
     {
+        int shift;
+        
+        if (character.getRectLeft() < Game.WIDTH / 2 * Game.SCALE)
+            shift = 0;
+        else if (character.getRectLeft() > this.right - Game.WIDTH / 2 * Game.SCALE)
+            shift = -(this.right - Game.WIDTH * Game.SCALE);
+        else
+            shift = -(this.left + character.getRectLeft()) + Game.WIDTH / 2 * Game.SCALE;
+            
+        g.translate(shift, 0);
+        
         g.setColor(new Color(125, 200, 255)); // sky blue
         g.fillRect(left, top, right, bottom);
             
@@ -204,6 +215,8 @@ public class World
             powerUp.paint(g);
             
         character.paint(g);
+        
+        g.translate(-shift, 0);
     }
     
     public void update()
