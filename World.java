@@ -50,16 +50,21 @@ public class World
     private BufferedImage monsterImg = ImageIO.read(new File("img/monster.png"));
     private BufferedImage oneUpImg = ImageIO.read(new File("img/potion.png"));
     
-    List<String> tokens = new ArrayList<String>();
+    private List<String> tokens = new ArrayList<String>();
+    
+    private String[] levelFiles = {"data/level1.txt",
+                                   "data/level2.txt",
+                                   "data/level3.txt"};
+    private int currentLevel = 0;
     
     public World() throws IOException
     {
-        load();
+        load(levelFiles[currentLevel]);
     }
     
-    public void load() throws IOException
+    public void load(String fileName) throws IOException
     {
-        Scanner inFile1 = new Scanner(new File("data/level1.txt")).useDelimiter("\n");
+        Scanner inFile1 = new Scanner(new File(fileName)).useDelimiter("\n");
         
         while (inFile1.hasNext()) {
             tokens.add(inFile1.nextLine());
@@ -186,6 +191,11 @@ public class World
         return enemyList;
     }
 
+    public int getLevel()
+    {
+        return currentLevel + 1;
+    }
+    
     public void paint(Graphics g)
     {
         int shift;
@@ -219,11 +229,18 @@ public class World
         g.translate(-shift, 0);
     }
     
-    public void update()
+    public void update() throws IOException
     {
         character.update();
         
         for (Sprite enemy : enemyList)
-            enemy.update();        
+            enemy.update();
+            
+        if (character.getRectRight() == this.right)
+        {
+             currentLevel++;
+             load(levelFiles[currentLevel]);
+             reset();
+        }
     }
 }

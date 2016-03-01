@@ -111,7 +111,7 @@ public class Game extends JPanel
         state = START;
     }
     
-    public void play() throws InterruptedException
+    public void play() throws InterruptedException, IOException
     {
         while (true)
         {
@@ -134,6 +134,7 @@ public class Game extends JPanel
         
         String scoreText = "Score: " + player.getScore();
         String livesText = "Lives: " + player.getLives();
+        String levelText = "Level: " + world.getLevel();
         String startText = "Press any key to start.";
         String pauseText = "Press 'p' to resume.";
         String overText = "Game Over";
@@ -147,7 +148,7 @@ public class Game extends JPanel
         g.setFont(small);
         g.drawString(scoreText, 32, 64);
         g.drawString(livesText, 32, 96);
-        
+        g.drawString(levelText, 32, 128);
         
         if (state == START)
         {
