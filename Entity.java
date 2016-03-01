@@ -9,6 +9,7 @@ import java.awt.image.BufferedImage;
 
 public abstract class Entity extends Sprite
 {
+    private int startX, startY;
     private int vx, vy;
     private World world;
     
@@ -16,11 +17,13 @@ public abstract class Entity extends Sprite
     {
         super(x, y, img);
         
+        this.startX = x;
+        this.startY = y;
         this.world = world;
-        vx = 0;
-        vy = 0;
+        
+        this.vx = 0;
+        this.vy = 0;
     }
-    
     
     public World getWorld()
     {
@@ -55,5 +58,10 @@ public abstract class Entity extends Sprite
     public void reverse()
     {
         vx *= -1;
+    }
+    
+    public void reset()
+    {
+        moveTo(startX, startY);
     }
 }

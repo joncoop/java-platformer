@@ -11,6 +11,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -33,11 +34,15 @@ public class World
     
     // world objects
     private Sprite character;
+    private List<Sprite> startBlockList = new ArrayList<Sprite>();
+    private List<Sprite> startCoinList = new ArrayList<Sprite>();
+    private List<Sprite> startEnemyList = new ArrayList<Sprite>();
+    private List<Sprite> startPowerUpList = new ArrayList<Sprite>();
+    
     private List<Sprite> blockList = new ArrayList<Sprite>();
     private List<Sprite> coinList = new ArrayList<Sprite>();
     private List<Sprite> enemyList = new ArrayList<Sprite>();
-    private List<Sprite> powerUpList = new ArrayList<Sprite>();
-    
+    private List<Sprite> powerUpList = new ArrayList<Sprite>();    
     // images
     private BufferedImage blockImg = ImageIO.read(new File("img/block.png"));
     private BufferedImage coinImg = ImageIO.read(new File("img/coin.png"));
@@ -48,6 +53,11 @@ public class World
     List<String> tokens = new ArrayList<String>();
     
     public World() throws IOException
+    {
+        load();
+    }
+    
+    public void load() throws IOException
     {
         Scanner inFile1 = new Scanner(new File("data/level1.txt")).useDelimiter("\n");
         
@@ -65,19 +75,19 @@ public class World
                     this.characterStartY = row * Game.SCALE;
                 }
                 else if (t.charAt(col) == 'B') {
-                    blockList.add(new Block(col * Game.SCALE, row * Game.SCALE, blockImg, this));
+                    startBlockList.add(new Block(col * Game.SCALE, row * Game.SCALE, blockImg, this));
                 }
                 else if (t.charAt(col) == 'S') {
-                    enemyList.add(new Slime(col * Game.SCALE, row * Game.SCALE, slimeImg, this));
+                    startEnemyList.add(new Slime(col * Game.SCALE, row * Game.SCALE, slimeImg, this));
                 }
                 else if (t.charAt(col) == 'M') {
-                    enemyList.add(new Monster(col * Game.SCALE, row * Game.SCALE, monsterImg, this));
+                    startEnemyList.add(new Monster(col * Game.SCALE, row * Game.SCALE, monsterImg, this));
                 }
                 else if (t.charAt(col) == 'C') {
-                    coinList.add(new Coin(col * Game.SCALE, row * Game.SCALE, coinImg, this));
+                    startCoinList.add(new Coin(col * Game.SCALE, row * Game.SCALE, coinImg, this));
                 }
                 else if (t.charAt(col) == 'U') {
-                    powerUpList.add(new OneUp(col * Game.SCALE, row * Game.SCALE, oneUpImg, this));
+                    startPowerUpList.add(new OneUp(col * Game.SCALE, row * Game.SCALE, oneUpImg, this));
                 }
                 
                 longest = Math.max(longest, t.length());
@@ -91,17 +101,29 @@ public class World
         this.left = 0;
         this.bottom = tokens.size() * Game.SCALE;
         this.right = 16 * 64;
-    }
-    
-    public void load()
-    {
-        // reads file and stores locations of Entites
+        
+        // initial state has all entities
+        blockList = new ArrayList<Sprite>(startBlockList);
+        coinList = new ArrayList<Sprite>(startCoinList);
+        enemyList = new ArrayList<Sprite>(startEnemyList);
+        powerUpList = new ArrayList<Sprite>(startPowerUpList);
     }
     
     public void reset()
     {
-        // need to save locations when file is read so reloading isn't necessary.
-        // should save lots of ioexception handling.
+        ((Entity)character).reset();
+        
+        for (Sprite block : blockList)
+            ((Entity)block).reset();
+            
+        for (Sprite enemy : enemyList)
+            ((Entity)enemy).reset();
+            
+        for (Sprite coin : coinList)
+            ((Entity)coin).reset();
+            
+        for (Sprite powerUp : powerUpList)
+            ((Entity)powerUp).reset();
     }
     
     public void addPlayer(Character character)
