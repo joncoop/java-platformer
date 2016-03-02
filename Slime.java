@@ -22,7 +22,9 @@ public class Slime extends Enemy
     
     public void moveAndProcessBlocks()
     {
-        List<Sprite> blockList = getWorld().getAllBlocks();
+        Level level = getWorld().getLevel();
+        
+        List<Sprite> blockList = level.getAllBlocks();
         List<Sprite> hitList;
         boolean rev;
         

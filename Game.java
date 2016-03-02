@@ -62,8 +62,8 @@ public class Game extends JPanel
         
         // make character
         BufferedImage characterImg = ImageIO.read(new File("img/baby_tux.png"));
-        int x = world.getPlayerStartX();
-        int y = world.getPlayerStartY();
+        int x = world.getLevel().getPlayerStartX();
+        int y = world.getLevel().getPlayerStartY();
         character = new Character(x, y, characterImg, world, player);
 
         world.addPlayer(character);
@@ -107,7 +107,7 @@ public class Game extends JPanel
         // Warning: this method doesn't reset coins & powerups yet!
         player.setScore(0);
         player.setLives(3);
-        world.reset();
+        //world.reset();
         state = START;
     }
     

@@ -42,11 +42,13 @@ public class Character extends Entity
     }
     
     public void jump()
-    {
+    {   
+        Level level = world.getLevel();
+        
         // nudge down 1 px
         move(0, 1);
         
-        List<Sprite> blockList = world.getAllBlocks();
+        List<Sprite> blockList = level.getAllBlocks();
         List<Sprite> hitList = getCollisionList(blockList);
         
         // jump if intersects with block
@@ -68,15 +70,18 @@ public class Character extends Entity
         p.setLives(p.getLives() - 1);
         
         if (p.getLives() > 0)
-            getWorld().reset();
+        {
+            //reset the level
+        }
     }
     
     public void moveAndProcessBlocks()
     {
-        List<Sprite> blockList = world.getAllBlocks();
+        Level level = world.getLevel();
+
+        List<Sprite> blockList = level.getAllBlocks();
         List<Sprite> hitList;
         
-
         int xVel = getVx();
         int yVel = getVy();
         
@@ -111,7 +116,9 @@ public class Character extends Entity
     
     public void processEnemies()
     {
-        List<Sprite> enemyList = world.getAllEnemies();
+        Level level = world.getLevel();
+
+        List<Sprite> enemyList = level.getAllEnemies();
         List<Sprite> hitList = getCollisionList(enemyList);
         
         if (hitList.size() > 0)
@@ -120,7 +127,9 @@ public class Character extends Entity
     
     public void processCoins()
     {
-        List<Sprite> coinList = world.getAllCoins();
+        Level level = world.getLevel();
+
+        List<Sprite> coinList = level.getAllCoins();
         List<Sprite> hitList = getCollisionList(coinList);
         
         for (Sprite hit : hitList)
@@ -132,7 +141,9 @@ public class Character extends Entity
     
     public void processPowerUps()
     {
-        List<Sprite> powerUpList = world.getAllPowerUps();
+        Level level = world.getLevel();
+
+        List<Sprite> powerUpList = level.getAllPowerUps();
         List<Sprite> hitList = getCollisionList(powerUpList);
         
         for (Sprite hit : hitList)
@@ -145,14 +156,16 @@ public class Character extends Entity
     
     public void checkWorldBoundaries()
     {          
-        if (getRectLeft() < world.getLeft())
-            setRectLeft(world.getLeft());
-        else if (getRectRight() > world.getRight())
-            setRectRight(world.getRight());
+        Level level = world.getLevel();
+
+        if (getRectLeft() < level.getLeft())
+            setRectLeft(level.getLeft());
+        else if (getRectRight() > level.getRight())
+            setRectRight(level.getRight());
             
-        if (getRectTop() < world.getTop())
-            setRectTop(world.getTop());
-        else if (getRectTop() > world.getBottom() + 2 * Game.SCALE)
+        if (getRectTop() < level.getTop())
+            setRectTop(level.getTop());
+        else if (getRectTop() > level.getBottom() + 2 * Game.SCALE)
             die();
     }
     

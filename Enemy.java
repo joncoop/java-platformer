@@ -22,20 +22,22 @@ public abstract class Enemy extends Entity
     // common enemy behaviors
     public void checkWorldBoundaries()
     {                
-        if (getRectLeft() <= getWorld().getLeft())
+        Level level = getWorld().getLevel();
+
+        if (getRectLeft() <= level.getLeft())
         {
-            setRectLeft(getWorld().getLeft());
+            setRectLeft(level.getLeft());
             reverse();
         }
-        else if (getRectRight() >= getWorld().getRight())
+        else if (getRectRight() >= level.getRight())
         {
-            setRectRight(getWorld().getRight());
+            setRectRight(level.getRight());
             reverse();
         }
             
-        if (getRectTop() < getWorld().getTop())
-            setRectTop(getWorld().getTop());
-        else if (getRectBottom() > getWorld().getBottom())
-            setRectBottom(getWorld().getBottom());
+        if (getRectTop() < level.getTop())
+            setRectTop(level.getTop());
+        else if (getRectBottom() > level.getBottom())
+            setRectBottom(level.getBottom());
     }
 }
