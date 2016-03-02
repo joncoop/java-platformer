@@ -79,21 +79,11 @@ public class Level {
                     this.characterStartX = x;
                     this.characterStartY = y;
                 }
-                else if (c == 'B') {
-                    blockList.add(new Block(x, y, blockImg, world));
-                }
-                else if (c == 'S') {
-                    enemyList.add(new Slime(x, y, slimeImg, world));
-                }
-                else if (c == 'M') {
-                    enemyList.add(new Monster(x, y, monsterImg, world));
-                }
-                else if (c == 'C') {
-                    coinList.add(new Coin(x, y, coinImg, world));
-                }
-                else if (x == 'U') {
-                    powerUpList.add(new OneUp(x, y, oneUpImg, world));
-                }
+                else if (c == 'B') { blockList.add(new Block(x, y, blockImg, world)); }
+                else if (c == 'S') { enemyList.add(new Slime(x, y, slimeImg, world)); }
+                else if (c == 'M') { enemyList.add(new Monster(x, y, monsterImg, world)); }
+                else if (c == 'C') { coinList.add(new Coin(x, y, coinImg, world)); }
+                else if (x == 'U') { powerUpList.add(new OneUp(x, y, oneUpImg, world)); }
                 
                 longest = Math.max(longest, line.length());
             }
