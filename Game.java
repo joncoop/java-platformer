@@ -134,7 +134,7 @@ public class Game extends JPanel
         
         String scoreText = "Score: " + player.getScore();
         String livesText = "Lives: " + player.getLives();
-        String levelText = "Level: " + world.getLevel();
+        String levelText = "Level: " + world.getLevelNum();
         String startText = "Press any key to start.";
         String pauseText = "Press 'p' to resume.";
         String overText = "Game Over";
