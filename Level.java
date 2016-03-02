@@ -16,8 +16,9 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
-public class Level
-{
+public class Level {
+    
+    // level data file
     String fileName;
     
     // world
@@ -32,10 +33,11 @@ public class Level
     // player start
     private int characterStartX, characterStartY;
 
-    private List<Sprite> blockList = new ArrayList<Sprite>();
-    private List<Sprite> coinList = new ArrayList<Sprite>();
-    private List<Sprite> enemyList = new ArrayList<Sprite>();
-    private List<Sprite> powerUpList = new ArrayList<Sprite>();
+    // entities
+    private List<Sprite> blockList;
+    private List<Sprite> coinList;
+    private List<Sprite> enemyList;
+    private List<Sprite> powerUpList;
     
     // images
     private BufferedImage blockImg = ImageIO.read(new File("img/block.png"));
@@ -44,48 +46,56 @@ public class Level
     private BufferedImage monsterImg = ImageIO.read(new File("img/monster.png"));
     private BufferedImage oneUpImg = ImageIO.read(new File("img/potion.png"));
     
-    public Level(String fileName, World world) throws IOException
-    {
+    public Level(String fileName, World world) throws IOException {
         this.fileName = fileName;
         this.world = world;
     }
 
-    public void load() throws IOException
-    {
-        Scanner inFile1 = new Scanner(new File(fileName)).useDelimiter("\n");
+    public void load() throws IOException {
+        blockList = new ArrayList<Sprite>();
+        coinList = new ArrayList<Sprite>();
+        enemyList = new ArrayList<Sprite>();
+        powerUpList = new ArrayList<Sprite>();
         
-        List<String> tokens = new ArrayList<String>();
+        Scanner dataFile = new Scanner(new File(fileName)).useDelimiter("\n");
+        
+        List<String> lines = new ArrayList<String>();
 
-        while (inFile1.hasNext()) {
-            tokens.add(inFile1.nextLine());
+        while (dataFile.hasNext()) {
+            lines.add(dataFile.nextLine());
         }
         
         int longest = 0;
         
         int row = 0;
-        for (String t : tokens) {
-            for (int col=0; col < t.length(); col++) {
-                if (t.charAt(col) == '1') {
-                    this.characterStartX = col * Game.SCALE;
-                    this.characterStartY = row * Game.SCALE;
+        for (String line : lines) {
+            for (int col=0; col < line.length(); col++) {
+                int x = col * Game.SCALE;
+                int y = row * Game.SCALE;
+                
+                char c = line.charAt(col);
+                
+                if (c == '1') {
+                    this.characterStartX = x;
+                    this.characterStartY = y;
                 }
-                else if (t.charAt(col) == 'B') {
-                    blockList.add(new Block(col * Game.SCALE, row * Game.SCALE, blockImg, world));
+                else if (c == 'B') {
+                    blockList.add(new Block(x, y, blockImg, world));
                 }
-                else if (t.charAt(col) == 'S') {
-                    enemyList.add(new Slime(col * Game.SCALE, row * Game.SCALE, slimeImg, world));
+                else if (c == 'S') {
+                    enemyList.add(new Slime(x, y, slimeImg, world));
                 }
-                else if (t.charAt(col) == 'M') {
-                    enemyList.add(new Monster(col * Game.SCALE, row * Game.SCALE, monsterImg, world));
+                else if (c == 'M') {
+                    enemyList.add(new Monster(x, y, monsterImg, world));
                 }
-                else if (t.charAt(col) == 'C') {
-                    coinList.add(new Coin(col * Game.SCALE, row * Game.SCALE, coinImg, world));
+                else if (c == 'C') {
+                    coinList.add(new Coin(x, y, coinImg, world));
                 }
-                else if (t.charAt(col) == 'U') {
-                    powerUpList.add(new OneUp(col * Game.SCALE, row * Game.SCALE, oneUpImg, world));
+                else if (x == 'U') {
+                    powerUpList.add(new OneUp(x, y, oneUpImg, world));
                 }
                 
-                longest = Math.max(longest, t.length());
+                longest = Math.max(longest, line.length());
             }
             
             row++;
@@ -94,8 +104,8 @@ public class Level
         // set boundaries
         this.top = 0;
         this.left = 0;
-        this.bottom = tokens.size() * Game.SCALE;
-        this.right = longest * 64;
+        this.bottom = lines.size() * Game.SCALE;
+        this.right = longest * Game.SCALE;
     }
 
     public int getTop()    { return top; }
@@ -103,7 +113,6 @@ public class Level
     public int getBottom() { return bottom; }
     public int getLeft()   { return left; }
     
-
     public int getPlayerStartX() { return characterStartX; }
     public int getPlayerStartY() { return characterStartY; }
     
@@ -112,8 +121,7 @@ public class Level
     public List<Sprite> getAllPowerUps() { return powerUpList; }
     public List<Sprite> getAllEnemies()  { return enemyList; }
     
-    public List<Sprite> getAllSprites()
-    {
+    public List<Sprite> getAllSprites() {
         List<Sprite> allSprites = new ArrayList<Sprite>();
         allSprites.addAll(blockList);
         allSprites.addAll(coinList);
@@ -121,5 +129,9 @@ public class Level
         allSprites.addAll(powerUpList);
         
         return allSprites;
+    }
+    
+    public void reset() {
+        //load();
     }
 }

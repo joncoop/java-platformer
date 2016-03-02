@@ -13,8 +13,8 @@ import java.util.List;
 import java.util.ArrayList;
 import java.io.IOException;
 
-public class World
-{    
+public class World {  
+    
     // world physics
     private double gravity = 1.0;
         
@@ -26,32 +26,24 @@ public class World
     private Level level;
     private int levelNum = 0;
     
-    public World() throws IOException
-    {
+    public World() throws IOException {
         this.level = new Level(levelFiles[0], this);
         level.load();
     }
     
-    public void addPlayer(Character character)
-    {
+    public void addPlayer(Character character) {
         this.character = character;
     }
     
-    public double getGravity()
-    {
-        return gravity;
-    }
-
-    public Level getLevel()  { return level; }
-    public int getLevelNum() { return levelNum; }
+    public double getGravity() { return gravity; }
+    public Level getLevel()    { return level; }
+    public int getLevelNum()   { return levelNum; }
     
-    public void advance()
-    {
+    public void advance() {
         levelNum++;
     }
     
-    public int calculateShift()
-    {
+    public int calculateShift() {
         int shift;
         
         if (character.getRectLeft() < Game.WIDTH / 2 * Game.SCALE)
@@ -64,8 +56,7 @@ public class World
         return shift;
     }
     
-    public void paint(Graphics g)
-    {
+    public void paint(Graphics g) {
         int shift = calculateShift();
         
         g.translate(shift, 0);
@@ -83,17 +74,17 @@ public class World
         g.translate(-shift, 0);
     }
     
-    public void update()
-    {
-        character.update();
+    public void update() {
         
         List<Sprite> spriteList = level.getAllSprites();
             
-        for (Sprite s : spriteList)
+        character.update();
+
+        for (Sprite s : spriteList) {
             s.update();
+        }
             
-        if (character.getRectRight() == level.getRight())
-        {
+        if (character.getRectRight() == level.getRight()) {
              // advance to next level
         }
     }

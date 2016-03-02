@@ -12,80 +12,66 @@ import java.awt.image.BufferedImage;
 import java.util.List;
 import java.util.ArrayList;
 
-public abstract class Sprite
-{
+public abstract class Sprite {
     private BufferedImage img;
     private int x, y;
     
-    public Sprite(int x, int y, BufferedImage img)
-    {
+    public Sprite(int x, int y, BufferedImage img) {
         this.x = x;
         this.y = y;
         this.img = img;
     }
     
-    public void move(int dx, int dy)
-    {
+    public void move(int dx, int dy) {
         x += dx;
         y += dy;
     }
     
-    public void moveTo(int x, int y)
-    {
+    public void moveTo(int x, int y) {
         this.x = x;
         this.y = y;
     }
     
-    public void setRectTop(int top)
-    {
+    public void setRectTop(int top) {
         y = top;
     }
     
-    public void setRectRight(int right)
-    {
+    public void setRectRight(int right) {
         x = right - img.getWidth();
     }
     
-    public void setRectBottom(int bottom)
-    {
+    public void setRectBottom(int bottom) {
         y = bottom - img.getHeight();
     }
     
-    public void setRectLeft(int left)
-    {
+    public void setRectLeft(int left) {
         x = left;
     }
     
-    public int getRectTop()
-    {
+    public int getRectTop() {
         return y;
     }
     
-    public int getRectRight()
-    {
+    public int getRectRight() {
         return x + img.getWidth();
     }
     
-    public int getRectBottom()
-    {
+    public int getRectBottom() {
         return y + img.getHeight();
     }
     
-    public int getRectLeft()
-    {
+    public int getRectLeft() {
         return x;
     }
     
-    public boolean collidesWith(Sprite other)
-    {
+    public boolean collidesWith(Sprite other) {
         return !( this.getRectLeft()   >= other.getRectRight()  ||
                   this.getRectRight()  <= other.getRectLeft()   ||
                   this.getRectTop()    >= other.getRectBottom() ||
                   this.getRectBottom() <= other.getRectTop() );
     }
     
-    public List<Sprite> getCollisionList(List<Sprite> spriteList) 
-    {
+    public List<Sprite> getCollisionList(List<Sprite> spriteList) {
         List<Sprite> collidedSprites = new ArrayList<Sprite>();
         
         for (Sprite s : spriteList)
@@ -95,8 +81,7 @@ public abstract class Sprite
         return collidedSprites;
     }
     
-    public void paint(Graphics g)
-    {
+    public void paint(Graphics g) {
         g.drawImage(img, x, y, img.getWidth(), img.getHeight(), null);
     }
     
