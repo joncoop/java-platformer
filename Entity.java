@@ -42,8 +42,5 @@ public abstract class Entity extends Sprite {
     public void reverse() {
         vx *= -1;
     }
-    
-    public void reset() {
-        moveTo(startX, startY);
-    }
+
 }

@@ -33,7 +33,7 @@ public class Game extends JPanel
     public static final int PAUSED = 2;
     public static final int OVER = 3;
        
-    private JFrame frame;
+    private JFrame gameFrame;
     private Player player;
     private Character character;
     private World world;
@@ -41,18 +41,13 @@ public class Game extends JPanel
     
     public Game() throws IOException
     {
+        // set panel size
         setMinimumSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
         setMaximumSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
         setPreferredSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
         
         // make Jframe
-        frame = new JFrame(TITLE);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLayout(new BorderLayout());
-        frame.add(this, BorderLayout.CENTER);
-        frame.pack();
-        frame.setResizable(true);
-        frame.setVisible(true);
+        gameFrame = getGameFrame();
         
         // make world
         world = new World();
@@ -79,44 +74,46 @@ public class Game extends JPanel
         requestFocus();
     }
     
-    public int getState()
-    {
+    public JFrame getGameFrame() {
+        JFrame frame = new JFrame(TITLE);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(new BorderLayout());
+        frame.add(this, BorderLayout.CENTER);
+        frame.pack();
+        frame.setResizable(true);
+        frame.setVisible(true);
+        
+        return frame;
+    }
+    
+    public int getState() {
         return state;
     }
     
-    public Player getPlayer()
-    {
+    public Player getPlayer() {
         return player;
     }
     
-    public void setState(int state)
-    {
+    public void setState(int state) {
         this.state = state;
     }
     
-    public void togglePause()
-    {
+    public void togglePause() {
         if (state == PLAYING)
             state = PAUSED;
         else if (state == PAUSED)
             state = PLAYING;
     }
 
-    public void restart()
-    {
-        // Warning: this method doesn't reset coins & powerups yet!
-        player.setScore(0);
-        player.setLives(3);
-        //world.reset();
+    public void restart() {
+        // this doesn't work yet
         state = START;
     }
     
-    public void play() throws InterruptedException, IOException
-    {
+    public void play() throws InterruptedException, IOException {
         while (true)
         {
-            if (state == PLAYING)
-            {
+            if (state == PLAYING) {
                 world.update();
             }
             
@@ -126,12 +123,13 @@ public class Game extends JPanel
         }
     }
     
-    public void paintComponent(Graphics g)
-    {
+    public void paintComponent(Graphics g) {
         super.paintComponent(g);
         
         world.paint(g);
         
+        
+        // all of the code below would probably be better in a GameStats class
         String scoreText = "Score: " + player.getScore();
         String livesText = "Lives: " + player.getLives();
         String levelText = "Level: " + world.getLevelNum();
@@ -150,20 +148,17 @@ public class Game extends JPanel
         g.drawString(livesText, 32, 96);
         g.drawString(levelText, 32, 128);
         
-        if (state == START)
-        {
+        if (state == START) {
             g.setFont(large);
             g.drawString(TITLE, 220, 250);
             g.setFont(small);
             g.drawString(startText, 320, 300);
         }
-        else if (state == PAUSED)
-        {
+        else if (state == PAUSED) {
             g.setFont(small);
             g.drawString(pauseText, 340, 280);
         }
-        else if (state == OVER)
-        {
+        else if (state == OVER) {
             g.setFont(large);
             g.drawString(overText, 240, 250);
             g.setFont(small);
