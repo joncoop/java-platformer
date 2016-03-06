@@ -36,7 +36,9 @@ public abstract class Entity extends Sprite {
     }
     
     public void applyGravity() {
-        vy += world.getGravity();
+        Level level = world.getLevel();
+        int gravity = level.getGravity();
+        vy += gravity;
     }
     
     public void reverse() {

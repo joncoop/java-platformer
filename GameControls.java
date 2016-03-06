@@ -42,7 +42,7 @@ public class GameControls implements KeyListener
         else if (state == Game.OVER)
         {
             if (code == KeyEvent.VK_N)
-                game.restart();
+                game.reset();
         }
     }
     

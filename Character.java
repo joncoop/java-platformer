@@ -10,19 +10,22 @@
 import java.awt.image.BufferedImage;
 import java.util.List;
 import java.util.ArrayList;
+import java.io.File;
 import java.io.IOException;
+import javax.imageio.ImageIO;
 
-public class Character extends Entity
-{
-    private World world;
+public class Character extends Entity {
+    //public static BufferedImage img = ;
+
+    private Game game;
     private Player player;
     private int runSpeed = 5;
     private int jumpPower = 20;
     
-    public Character(int x, int y, BufferedImage img, World world, Player player)
+    public Character(Player player, Game game) throws IOException
     {
-        super(x, y, img, world);
-        this.world = world;
+        super(0, 0, ImageIO.read(new File("img/baby_tux.png")), game.getWorld());
+        this.game = game;
         this.player = player;
     }
     
@@ -43,6 +46,7 @@ public class Character extends Entity
     
     public void jump()
     {   
+        World world = game.getWorld();
         Level level = world.getLevel();
         
         // nudge down 1 px
@@ -68,15 +72,12 @@ public class Character extends Entity
     {
         Player p = getPlayer();
         p.setLives(p.getLives() - 1);
-        
-        if (p.getLives() > 0)
-        {
-            //reset the level
-        }
+
     }
     
     public void moveAndProcessBlocks()
     {
+        World world = game.getWorld();
         Level level = world.getLevel();
 
         List<Sprite> blockList = level.getAllBlocks();
@@ -116,6 +117,7 @@ public class Character extends Entity
     
     public void processEnemies()
     {
+        World world = game.getWorld();
         Level level = world.getLevel();
 
         List<Sprite> enemyList = level.getAllEnemies();
@@ -127,7 +129,8 @@ public class Character extends Entity
     
     public void processCoins()
     {
-        Level level = world.getLevel();
+       World world = game.getWorld();
+       Level level = world.getLevel();
 
         List<Sprite> coinList = level.getAllCoins();
         List<Sprite> hitList = getCollisionList(coinList);
@@ -141,6 +144,7 @@ public class Character extends Entity
     
     public void processPowerUps()
     {
+        World world = game.getWorld();
         Level level = world.getLevel();
 
         List<Sprite> powerUpList = level.getAllPowerUps();
@@ -155,7 +159,8 @@ public class Character extends Entity
     }
     
     public void checkWorldBoundaries()
-    {          
+    {
+        World world = game.getWorld();
         Level level = world.getLevel();
 
         if (getRectLeft() < level.getLeft())

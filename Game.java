@@ -7,17 +7,15 @@
  *      <https://github.com/joncoop/java-platformer>.
  */
 
-import java.awt.BorderLayout;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import javax.swing.JFrame;
+import java.util.List;
+import java.util.ArrayList;
 import javax.swing.JPanel;
-import java.io.File;
 import java.io.IOException;
-import javax.imageio.ImageIO;
 
 public class Game extends JPanel
 {
@@ -33,12 +31,17 @@ public class Game extends JPanel
     public static final int PAUSED = 2;
     public static final int OVER = 3;
        
-    private JFrame gameFrame;
+    private GameFrame frame;
     private Player player;
     private Character character;
+    private List<Level> levels;
     private World world;
     private int state;
     
+    private String[] levelFileNames = {"data/level1.txt",
+                                       "data/level2.txt", 
+                                       "data/level3.txt"};
+                                                              
     public Game() throws IOException
     {
         // set panel size
@@ -47,22 +50,25 @@ public class Game extends JPanel
         setPreferredSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
         
         // make Jframe
-        gameFrame = getGameFrame();
-        
-        // make world
-        world = new World();
+        frame = new GameFrame(TITLE, this);
         
         // make player
         player = new Player(this);
         
         // make character
-        BufferedImage characterImg = ImageIO.read(new File("img/baby_tux.png"));
-        int x = world.getLevel().getPlayerStartX();
-        int y = world.getLevel().getPlayerStartY();
-        character = new Character(x, y, characterImg, world, player);
+        character = new Character(player, this);
 
-        world.addPlayer(character);
+        // make levels
+        levels = new ArrayList<Level>();
+        for (String fileName : levelFileNames) {
+            Level level = new Level(fileName, this);
+            levels.add(level);
+        }
         
+        // make world
+        world = new World(levels, this);
+        world.addCharacter(character);
+                
         // add input handlers
         addKeyListener(new GameControls(this));
         addKeyListener(new CharacterControls(character, this));
@@ -73,25 +79,21 @@ public class Game extends JPanel
         // request focus
         requestFocus();
     }
+     
+    public Player getPlayer() {
+        return player;
+    }
     
-    public JFrame getGameFrame() {
-        JFrame frame = new JFrame(TITLE);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLayout(new BorderLayout());
-        frame.add(this, BorderLayout.CENTER);
-        frame.pack();
-        frame.setResizable(true);
-        frame.setVisible(true);
-        
-        return frame;
+    public Character getCharacter() {
+        return character;
+    }
+    
+    public World getWorld() {
+        return world;
     }
     
     public int getState() {
         return state;
-    }
-    
-    public Player getPlayer() {
-        return player;
     }
     
     public void setState(int state) {
@@ -105,20 +107,18 @@ public class Game extends JPanel
             state = PLAYING;
     }
 
-    public void restart() {
-        // this doesn't work yet
-        state = START;
+    public void reset() {
+        // not implemented;
     }
     
-    public void play() throws InterruptedException, IOException {
+    public void play() throws InterruptedException {
         while (true)
         {
             if (state == PLAYING) {
                 world.update();
             }
             
-            repaint();
-            
+            repaint();  
             Thread.sleep(10);
         }
     }
@@ -126,8 +126,7 @@ public class Game extends JPanel
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         
-        world.paint(g);
-        
+        //world.paint(g);
         
         // all of the code below would probably be better in a GameStats class
         String scoreText = "Score: " + player.getScore();
@@ -163,6 +162,6 @@ public class Game extends JPanel
             g.drawString(overText, 240, 250);
             g.setFont(small);
             g.drawString(newText, 285, 300);
-        }     
+        }    
     }
 }

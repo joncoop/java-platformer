@@ -7,7 +7,6 @@
  *      <https://github.com/joncoop/java-platformer>.
  */
 
-import java.io.File;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -21,8 +20,8 @@ public class Level {
     // level data file
     String fileName;
     
-    // world
-    World world;
+    // game
+    Game game;
     
     // level boundaries
     private int top;
@@ -30,6 +29,9 @@ public class Level {
     private int right;
     private int left;
 
+    // physics
+    private int gravity;
+    
     // player start
     private int characterStartX, characterStartY;
 
@@ -39,69 +41,77 @@ public class Level {
     private List<Sprite> enemyList;
     private List<Sprite> powerUpList;
     
-    // images
-    private BufferedImage blockImg = ImageIO.read(new File("img/block.png"));
-    private BufferedImage coinImg = ImageIO.read(new File("img/coin.png"));
-    private BufferedImage slimeImg = ImageIO.read(new File("img/slime.png"));
-    private BufferedImage monsterImg = ImageIO.read(new File("img/monster.png"));
-    private BufferedImage oneUpImg = ImageIO.read(new File("img/potion.png"));
+    private boolean isComplete;
     
-    public Level(String fileName, World world) throws IOException {
+    public Level(String fileName, Game game) {
         this.fileName = fileName;
-        this.world = world;
+        this.game = game;
+        
+        this.gravity = 1;
+        this.isComplete = false;
     }
 
-    public void load() throws IOException {
-        blockList = new ArrayList<Sprite>();
-        coinList = new ArrayList<Sprite>();
-        enemyList = new ArrayList<Sprite>();
-        powerUpList = new ArrayList<Sprite>();
+    public void load() {
         
-        Scanner dataFile = new Scanner(new File(fileName)).useDelimiter("\n");
-        
-        List<String> lines = new ArrayList<String>();
-
-        while (dataFile.hasNext()) {
-            lines.add(dataFile.nextLine());
-        }
-        
-        int longest = 0;
-        
-        int row = 0;
-        for (String line : lines) {
-            for (int col=0; col < line.length(); col++) {
-                int x = col * Game.SCALE;
-                int y = row * Game.SCALE;
-                
-                char c = line.charAt(col);
-                
-                if (c == '1') {
-                    this.characterStartX = x;
-                    this.characterStartY = y;
-                }
-                else if (c == 'B') { blockList.add(new Block(x, y, blockImg, world)); }
-                else if (c == 'S') { enemyList.add(new Slime(x, y, slimeImg, world)); }
-                else if (c == 'M') { enemyList.add(new Monster(x, y, monsterImg, world)); }
-                else if (c == 'C') { coinList.add(new Coin(x, y, coinImg, world)); }
-                else if (x == 'U') { powerUpList.add(new OneUp(x, y, oneUpImg, world)); }
-                
-                longest = Math.max(longest, line.length());
+        try {  
+            World world = game.getWorld();
+            
+            blockList = new ArrayList<Sprite>();
+            coinList = new ArrayList<Sprite>();
+            enemyList = new ArrayList<Sprite>();
+            powerUpList = new ArrayList<Sprite>();
+            
+            Scanner dataFile = new Scanner(new File(fileName)).useDelimiter("\n");
+            
+            List<String> lines = new ArrayList<String>();
+    
+            while (dataFile.hasNext()) {
+                lines.add(dataFile.nextLine());
             }
             
-            row++;
-        }        
- 
-        // set boundaries
-        this.top = 0;
-        this.left = 0;
-        this.bottom = lines.size() * Game.SCALE;
-        this.right = longest * Game.SCALE;
+            int longest = 0;
+            
+            int row = 0;
+            for (String line : lines) {
+                for (int col=0; col < line.length(); col++) {
+                    int x = col * Game.SCALE;
+                    int y = row * Game.SCALE;
+                    
+                    char c = line.charAt(col);
+                    
+                    if (c == '1') {
+                        this.characterStartX = x;
+                        this.characterStartY = y;
+                    }
+                    else if (c == 'B') { blockList.add(new Block(x, y, world)); }
+                    else if (c == 'S') { enemyList.add(new Slime(x, y, world)); }
+                    else if (c == 'M') { enemyList.add(new Monster(x, y, world)); }
+                    else if (c == 'C') { coinList.add(new Coin(x, y, world)); }
+                    else if (x == 'U') { powerUpList.add(new OneUp(x, y, world)); }
+                    
+                    longest = Math.max(longest, line.length());
+                }
+                
+                row++;
+            }        
+     
+            // set boundaries
+            this.top = 0;
+            this.left = 0;
+            this.bottom = lines.size() * Game.SCALE;
+            this.right = longest * Game.SCALE;
+        }
+        catch (IOException e){
+            
+        }
     }
 
     public int getTop()    { return top; }
     public int getRight()  { return right; }
     public int getBottom() { return bottom; }
     public int getLeft()   { return left; }
+    
+    public int getGravity() { return gravity; }
     
     public int getPlayerStartX() { return characterStartX; }
     public int getPlayerStartY() { return characterStartY; }
@@ -121,7 +131,15 @@ public class Level {
         return allSprites;
     }
     
+    public void start() {
+        // not implemented
+    }
+    
     public void reset() {
-        //load();
+        // not implemented
+    }
+    
+    public boolean isComplete() {
+        return isComplete();
     }
 }

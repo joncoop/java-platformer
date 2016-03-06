@@ -15,32 +15,40 @@ import java.io.IOException;
 
 public class World {  
     
+    // game
+    Game game;
+    
     // world physics
-    private double gravity = 1.0;
+    private double gravity = 1.0; // move to level (maybe for moon/underwater, etc)
         
     private Character character;
     
-    private String[] levelFiles = {"data/level1.txt",
-                                   "data/level2.txt",
-                                   "data/level3.txt"};
-    private Level level;
+    private List<Level> levels;
+    private Level currentLevel;
     private int levelNum = 0;
     
-    public World() throws IOException {
-        this.level = new Level(levelFiles[0], this);
-        level.load();
+    public World(List<Level> levels, Game game) {
+        this.levels = levels;
+        this.game = game;
     }
     
-    public void addPlayer(Character character) {
+    public void addCharacter(Character character) {
         this.character = character;
     }
     
-    public double getGravity() { return gravity; }
-    public Level getLevel()    { return level; }
-    public int getLevelNum()   { return levelNum; }
+    public int getLevelNum() {
+        return levelNum; 
+    }
+    
+    public Level getLevel() {
+        return currentLevel;
+    }
     
     public void advance() {
         levelNum++;
+        currentLevel = levels.get(levelNum);
+        currentLevel.load();
+        currentLevel.start();
     }
     
     public int calculateShift() {
@@ -48,10 +56,10 @@ public class World {
         
         if (character.getRectLeft() < Game.WIDTH / 2 * Game.SCALE)
             shift = 0;
-        else if (character.getRectLeft() > level.getRight() - Game.WIDTH / 2 * Game.SCALE)
-            shift = -(level.getRight() - Game.WIDTH * Game.SCALE);
+        else if (character.getRectLeft() > currentLevel.getRight() - Game.WIDTH / 2 * Game.SCALE)
+            shift = -(currentLevel.getRight() - Game.WIDTH * Game.SCALE);
         else
-            shift = -(level.getLeft() + character.getRectLeft()) + Game.WIDTH / 2 * Game.SCALE;
+            shift = -(currentLevel.getLeft() + character.getRectLeft()) + Game.WIDTH / 2 * Game.SCALE;
         
         return shift;
     }
@@ -59,33 +67,37 @@ public class World {
     public void paint(Graphics g) {
         int shift = calculateShift();
         
-        g.translate(shift, 0);
         
+        g.translate(shift, 0);
+        /*
         g.setColor(new Color(125, 200, 255)); // sky blue
-        g.fillRect(level.getLeft(), level.getTop(), level.getRight(), level.getBottom());
-            
-        List<Sprite> spriteList = level.getAllSprites();
+        g.fillRect(currentLevel.getLeft(), currentLevel.getTop(), currentLevel.getRight(), currentLevel.getBottom());
+        
+        
+        List<Sprite> spriteList = currentLevel.getAllSprites();
             
         for (Sprite s : spriteList)
             s.paint(g);
-            
+        */
         character.paint(g);
         
         g.translate(-shift, 0);
+        
     }
     
     public void update() {
         
-        List<Sprite> spriteList = level.getAllSprites();
+        List<Sprite> spriteList = currentLevel.getAllSprites();
             
-        character.update();
-
         for (Sprite s : spriteList) {
             s.update();
         }
-            
-        if (character.getRectRight() == level.getRight()) {
-             // advance to next level
+        
+        character.update();
+
+        if (currentLevel.isComplete()) {
+             advance();
         }
     }
+ 
 }
