@@ -36,6 +36,7 @@ public class Game extends JPanel
     private Character character;
     private List<Level> levels;
     private World world;
+    private StatsOverlay stats;
     private int state;
     
     private String[] levelFileNames = {"data/level1.txt",
@@ -68,7 +69,10 @@ public class Game extends JPanel
         // make world
         world = new World(levels, this);
         world.addCharacter(character);
-                
+        
+        // make stats display
+        stats = new StatsOverlay(this);
+        
         // add input handlers
         addKeyListener(new GameControls(this));
         addKeyListener(new CharacterControls(character, this));
@@ -128,40 +132,7 @@ public class Game extends JPanel
         
         //world.paint(g);
         
-        // all of the code below would probably be better in a GameStats class
-        String scoreText = "Score: " + player.getScore();
-        String livesText = "Lives: " + player.getLives();
-        String levelText = "Level: " + world.getLevelNum();
-        String startText = "Press any key to start.";
-        String pauseText = "Press 'p' to resume.";
-        String overText = "Game Over";
-        String newText = "Press 'n' to start a new game.";
-        
-        Font small = new Font("Serif", Font.PLAIN, 32);
-        Font medium = new Font("Serif", Font.PLAIN, 64);
-        Font large = new Font("Serif", Font.PLAIN, 96);
-        
-        g.setColor(Color.WHITE);
-        g.setFont(small);
-        g.drawString(scoreText, 32, 64);
-        g.drawString(livesText, 32, 96);
-        g.drawString(levelText, 32, 128);
-        
-        if (state == START) {
-            g.setFont(large);
-            g.drawString(TITLE, 220, 250);
-            g.setFont(small);
-            g.drawString(startText, 320, 300);
-        }
-        else if (state == PAUSED) {
-            g.setFont(small);
-            g.drawString(pauseText, 340, 280);
-        }
-        else if (state == OVER) {
-            g.setFont(large);
-            g.drawString(overText, 240, 250);
-            g.setFont(small);
-            g.drawString(newText, 285, 300);
-        }    
+        stats.paint(g);
+ 
     }
 }
